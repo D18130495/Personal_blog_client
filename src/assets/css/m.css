@@ -24,12 +24,12 @@ nav { width: 100%; height: auto; background: rgba(0,0,0,0.5); margin-top: 18px; 
 #mnavh { overflow: hidden; position: absolute; }
 #mnavh { display: block; }
 #starlist { display: none; width: 100%;/* top: 30px; */ }
-#starlist li { width: 55%; text-align: center; background: #12b7de; float: none; display: block; font-weight: bold; }
+#starlist li { width: 35%; text-align: center; background: rgba(0,0,0,0.5); float: none; display: block; font-weight: bold; }
 #starlist li:last-child { padding-bottom: 100% }
-#starlist li a { color: #fff; display: block; width: 100%; text-align: center; float: none; padding: 0; background: #12b7de; border-bottom: #49ccea 1px solid; }
-#starlist ul.sub { display: block; position: inherit; left: inherit; top: inherit; }
+#starlist li a { color: #fff; display: block; width: 100%; text-align: center; float: none; padding: 0; background: transparent; border-bottom: rgba(0,0,0,0.5) 1px solid; }
+#starlist ul.sub { position: inherit; left: inherit; top: inherit; }
 #starlist ul.sub li { width: 100% }
-#starlist ul.sub li:last-child { padding-bottom: 0; border-bottom: #49ccea 1px solid; }
+#starlist ul.sub li:last-child { padding-bottom: 0; border-bottom: rgba(0,0,0,0.5) 1px solid; }
 #starlist ul.sub li a { color: #fff; font-weight: normal; border-bottom: none; }
 #starlist ul.sub li a:hover, #starlist li:hover a, #starlist #selected { color: #fff; }
 .menu span { display: block; width: 50px; height: 50px; background: #12b7de; opacity: 0.5; position: absolute; top: 0; right: 0; border-left: #49ccea 1px solid; }

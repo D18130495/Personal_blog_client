@@ -1,18 +1,17 @@
 <template>
     <div>
-        <!-- top begin -->
         <header id="header">
             <div class="navbox">
                 <h2 id="mnavh" >
                     <span class="navicon"></span>
                 </h2>
                 <div class="logo">
-                    <a href="/">HuaruoYM个人博客</a>
+                    <a href="/">HuaruoYM Blog</a>
                 </div>
                 <nav>
                     <ul id="starlist">
                         <li>
-                            <a href="/">首页</a>
+                            <a href="/">Home</a>
                         </li>
                         <li  v-for="(item,index) in channels " :key="index" :class="{menu: item.children}">
                             <router-link v-if="item.single"  :to='"/channel_detail/"+item.id'>{{item.name}}</router-link>
@@ -21,7 +20,8 @@
                             <ul class="sub" v-if="item.children">
                                 <li v-for="(sub,sindex) in item.children" :key="sindex">
                                     <router-link v-if="sub.single" :to='"/channel_detail/"+sub.id'>{{sub.name}}</router-link>
-                                    <router-link v-else :to='"/list/"+sub.id'>{{sub.name}}</router-link></li>
+                                    <router-link v-else :to='"/list/"+sub.id'>{{sub.name}}</router-link>
+                                </li>
                             </ul>
                         </li>
                         <li >
@@ -52,12 +52,11 @@
             <div class="searchclose"></div>
         </div> -->
     </div>
-    <!--top end-->
 </template>
 
 <script>
     import channelApi from '@/api/front/channel'
-    // import $ from 'jquery'
+    import $ from 'jquery'
 
     export default {
         data(){
@@ -74,28 +73,28 @@
         created() {
             this.getHeaderTag()
         },
-        // mounted() {
-          
-            // $("#mnavh").click(function() {
-            //     $("#starlist").toggle();
-            //     $("#mnavh").toggleClass("open");
-            // });
+        mounted() {
+            $("#mnavh").click(function() {
+                $("#starlist").toggle();
+                $("#mnavh").toggleClass("open");
+            })
+            
+            //search
+            $(".searchico").click(function() {
+                $(".search").toggleClass("open");
+            })
 
-            // //search
-            // $(".searchico").click(function() {
-            //     $(".search").toggleClass("open");
-            // });
-            // //searchclose
-            // $(".searchclose").click(function() {
-            //     $(".search").removeClass("open");
-            // });
-        // },
+            //searchclose
+            $(".searchclose").click(function() {
+                $(".search").removeClass("open");
+            })
+        },
         methods:{
             getHeaderTag() {
                 channelApi.queryByPos('a')
                     .then(response =>{
                         this.channels = response.data
-                        console.log(response.data)
+                        console.log(this.channels)
                     }).catch(error=>{
                         console.log(error)
                     })

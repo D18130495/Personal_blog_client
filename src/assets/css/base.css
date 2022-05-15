@@ -24,12 +24,11 @@ header::before { background: #000 linear-gradient(to left, #4cd964, #5ac8fa, #00
 .imgscale:hover img { transform: scale(1.1); }
 /*nav*/
 nav { float: left; height: 50px; line-height: 50px; text-align: center; }
-#starlist { }
 #starlist li { position: relative; display: inline; float: left; width: max-content; }
 #starlist li a { display: inline; float: left; padding: 0 20px; color: #fff }
 #starlist li a:hover, #starlist #selected, .selected > a, #starlist li:hover { color: #00c1de; }
 #starlist li:hover a { color: #00c1de }
-#starlist ul.sub { overflow: hidden; position: absolute; left: 0; top: 50px; background: #008b8b; display: none; z-index: 9 }
+#starlist ul.sub { overflow: hidden; position: absolute; left: 0; top: 50px; background: #7B68EE; display: none; z-index: 9 }
 #starlist ul.sub li { height: 30px; line-height: 30px; font-size: 16px; }
 #starlist ul.sub li:last-child { padding-bottom: 10px }
 #starlist ul.sub li a { color: #FFF }
@@ -239,7 +238,7 @@ a.iconfont.icon-weixin { color: #07AF12;    background: url(../images/c04.png) n
 .tongji_gzh { width: 80%; margin: auto; overflow: hidden; }
 .tongji_gzh img { width: 100% }
 /*footer*/
-footer { background: #008b8b; width: 100%; border-top: #00C1DE 10px solid; padding: 30px 0; color: #f8f8f8; font-size: 14px; }
+footer { background: #7B68EE; width: 100%; padding: 30px 0; color: #f8f8f8; font-size: 14px; }
 .wxbox { overflow: hidden; float: left; margin-right: 20px }
 .wxbox li { float: left; margin: 0 10px; text-align: center }
 .wxbox img { height: 100px }
