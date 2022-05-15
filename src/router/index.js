@@ -18,7 +18,7 @@ import  VueRouter from 'vue-router'
 // import  ArticleAdd from '../views/admin/article/Add'
 // import  ArticleEdit from '../views/admin/article/Edit'
 
-import FIndex from  '../views/front/Index'
+import Index from  '../views/front/Index'
 // import List from  '../views/front/List'
 // import Detail from  '../views/front/Detail'
 // import ChannelDetail from  '../views/front/ChannelDetail'
@@ -34,8 +34,8 @@ const router=new VueRouter({
 
         {
             path: '/',
-            name: 'fIndex',
-            component: FIndex,
+            name: 'Index',
+            component: Index,
             meta:{
                 requireLogin: false
             }
