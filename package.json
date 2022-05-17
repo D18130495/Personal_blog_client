@@ -17,7 +17,7 @@
     "jquery": "^3.5.1",
     "node-sass": "^5.0.0",
     "request": "^2.88.2",
-    "swiper": "^6.2.0",
+    "swiper": "^6.4.5",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
     "vue-cropper": "^0.5.5",

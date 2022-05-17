@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    // import {getRandomArticle} from '@/api/front'
+    import articleApi from '@/api/front/article'
 
     export default {
         name: "HeaderLine",
@@ -26,13 +26,21 @@
             }
         },
         created() {
-            getRandomArticle().then(data=>{
-                this.articles=data.data
-                this.title1=this.articles[0]
-                this.title2=this.articles[1]
-            })
+            this.getRandomArticle()
         },
-
+        methods:{
+            getRandomArticle() {
+                articleApi.queryByPos('a')
+                    .then(response =>{
+                        this.articles = response.data
+                        this.title1 = this.articles[0]
+                        this.title2 = this.articles[1]
+                        console.log(this.articles)
+                    }).catch(error=>{
+                        console.log(error)
+                    })
+            }
+        }
     }
 </script>
 
