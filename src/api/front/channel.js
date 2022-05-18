@@ -1,10 +1,16 @@
 import request from '@/utils/request'
 
 export default {
-    queryByPos(pos) {
+    getChannelByPos(pos) {
       return request({
-          url: `front/channel/queryByPos/${pos}`,
-          method: 'get'
+        url: `front/channel/getChannelByPos/${pos}`,
+        method: 'get'
+      })
+    },
+    getArticleByChannelId(channelId) {
+      return request({
+        url: `front/channel/getArticleByChannelId/${channelId}`,
+        method: 'get'
       })
     }
 }

@@ -13,9 +13,9 @@
                         <li>
                             <a href="/">Home</a>
                         </li>
-                        <li  v-for="(item,index) in channels " :key="index" :class="{menu: item.children}">
-                            <router-link v-if="item.single"  :to='"/channel_detail/"+item.id'>{{item.name}}</router-link>
-                            <router-link v-else :to='"/list/"+item.id'>{{item.name}}</router-link>
+                        <li v-for="(item, index) in channels" :key="index" :class="{menu: item.children}">
+                            <router-link v-if="item.single"  :to='"/channel_detail/" + item.id'>{{item.name}}</router-link>
+                            <router-link v-else :to='"/list/" + item.id'>{{item.name}}</router-link>
 
                             <ul class="sub" v-if="item.children">
                                 <li v-for="(sub,sindex) in item.children" :key="sindex">
@@ -91,10 +91,9 @@
         },
         methods:{
             getHeaderTag() {
-                channelApi.queryByPos('a')
+                channelApi.getChannelByPos('a')
                     .then(response =>{
                         this.channels = response.data
-                        console.log(this.channels)
                     }).catch(error=>{
                         console.log(error)
                     })

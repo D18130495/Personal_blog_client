@@ -62,7 +62,7 @@
             }
         },
         beforeRouteUpdate(to, from, next){
-            this.xx = false;
+            this.xx = false
             this.$nextTick(() => {
                 this.xx = true
             })
@@ -73,10 +73,10 @@
                 console.log(data)
                 console.log(data)
                 console.log('aaaa')
-                this.newData = data;
+                this.newData = data
             },
             parentEvenTitle(data){
-                this.title=data
+                this.title = data
             }
         },
         mounted() {
