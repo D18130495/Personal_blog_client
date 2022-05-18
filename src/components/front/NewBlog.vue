@@ -1,113 +1,155 @@
 <template>
     <div class="whitebg bloglist" >
-
-        <h2 class="htitle" >最新博文</h2>
+        <h2 class="htitle" >Latest</h2>
         <ul>
-            <li v-for="(item,index) in articleTops" :key="index.id">
-                <h3 class="blogtitle"><router-link :to='"/detail/"+item.id'  arget="_blank"><b>【置顶】</b>{{item.title}}</router-link></h3>
-                <span class="blogpic imgscale"><i><router-link :to='"/detail/"+item.id'>{{item.channel.name}}</router-link></i>
-                    <router-link :to='"/detail/"+item.id' target="_blank">
-                        <img v-if="item.titleImg==null ||item.titleImg=='' " width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
-                        <img v-else  width="130px" height="130px"  :src="item.titleImg" alt="">
+            <li v-for="(article, index) in toppedArticle" :key="index.id">
+                <h3 class="blogtitle">
+                    <router-link :to='"/detail/" + article.id'  arget="_blank">
+                        <b>【Topped】</b>
+                        {{ article.title }}
+                    </router-link>
+                </h3>
+
+                <span class="blogpic imgscale">
+                    <i>
+                        <router-link :to='"/detail/" + article.id'>
+                            {{ article.channel.name }}
+                        </router-link>
+                    </i>
+
+                    <router-link :to='"/detail/" + article.id' target="_blank">
+                        <img v-if="article.titleImg == null || article.titleImg == ''" width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
+                        <img v-else width="130px" height="130px" :src="article.titleImg" alt="">
                     </router-link>
                 </span>
-                <p class="blogtext">{{item.summary}} </p>
+
+                <p class="blogtext">
+                    {{ article.summary }}
+                </p>
+
                 <p class="bloginfo">
-                    <i class="avatar"><img :src="item.user.avatar"></i>
-                    <span>{{item.user.nickName}}</span><span>{{item.createDate}}</span></p>
-                <router-link :to='"/detail/"+item.id' target="_blank"  class="viewmore"> 阅读更多</router-link >
+                    <i class="avatar"><img :src="article.user.avatar"></i>
+                    <span>{{ article.user.nickName }}</span>
+                    <span>{{ article.createTime }}</span>
+                </p>
+
+                <router-link :to='"/detail/" + article.id' target="_blank" class="viewmore">More</router-link>
             </li>
 
+            <li v-for="(item, index) in articles" :key="index">
+                <a href="#search" name="content"/>
+                <h3 class="blogtitle">
+                    <router-link :to='"/detail/" + item.id' target="_blank">
+                        {{ item.title }}
+                    </router-link>
+                </h3>
+                <span class="blogpic imgscale">
+                    <i>
+                        <router-link :to='"/detail/" + item.id'>
+                            {{ item.channel.name }}
+                        </router-link>
+                    </i>
 
-            <!--单图-->
-            <li v-for="(item,index) in articles" :key="index">
-                <a href="#search" name="content"></a>
-                <h3 class="blogtitle"><router-link :to='"/detail/"+item.id' target="_blank">{{item.title}}</router-link></h3>
-                <span class="blogpic imgscale"><i><router-link :to='"/detail/"+item.id'>{{item.channel.name}}</router-link></i>
-                    <router-link :to='"/detail/"+item.id' target="_blank">
-                        <img v-if="item.titleImg==null ||item.titleImg=='' " width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
-                        <img v-else width="130px" height="130px"  :src="item.titleImg" alt="">
+                    <router-link :to='"/detail/" + item.id' target="_blank">
+                        <img v-if="item.titleImg == null || item.titleImg == ''" width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
+                        <img v-else width="130px" height="130px" :src="item.titleImg" alt="">
                     </router-link>
                 </span>
-                <p class="blogtext">{{item.summary}} </p>
+                <p class="blogtext">
+                    {{ item.summary }}
+                </p>
                 <p class="bloginfo">
-                    <i class="avatar"><img :src="item.user.avatar"></i>
-                    <span>{{item.user.nickName}}</span><span>{{item.createDate}}</span></p>
-                <router-link :to='"/detail/"+item.id' target="_blank" class="viewmore"> 阅读更多</router-link >
+                    <i class="avatar">
+                        <img :src="item.user.avatar">
+                    </i>
+                    <span>{{ item.user.nickName }}</span>
+                    <span>{{ item.createTime }}</span>
+                </p>
+                <router-link :to='"/detail/" + item.id' target="_blank" class="viewmore">More</router-link>
             </li>
         </ul>
 
         <div>
             <el-pagination
                     background
-                    layout="total,prev, pager, next,jumper"
-                    @current-change="handleCurrentChange"
-                    :current-page="pageNo"
-                    :page-size="8"
-                    :total="total">
+                    layout=" total, prev, pager, next, jumper"
+                    @current-change = "handleCurrentChange"
+                    :current-page = "current"
+                    :page-size = "limit"
+                    :total = "total">
             </el-pagination>
         </div>
     </div>
 </template>
 
 <script>
-    // import {getPageList,getNewBlogTop,search} from "@/api/front";
+    import articleApi from '@/api/front/article'
+    // import {getPageList, getNewBlogTop, search} from "@/api/front";
     // import evenBus from  '@/utils/evenBus'
 
     export default {
         name: "NewBlog",
-        props:['search','childevenTitle'],
+        props:['search', 'childevenTitle'],
         watch: {
-            search: function(newVal,oldVal){
+            search: function(newVal, oldVal){
                 this.articles=newVal.list
                 this.total=newVal.total
                 this.truth=true
             },
             childevenTitle: function(newVal,oldVal){
-               this.queryForm.title=newVal
+               this.queryForm.title = newVal
             },
-
         },
         data(){
             return{
                 articles: [],
-                articleTops: [],
-                searchs:[],
-                truth:false,
+                toppedArticle: [],
+                searchs: [],
+                truth: false,
                 page: '',
-                pageNo: 1,
+                current: 1,
                 pages: '',
+                limit: 5,
                 total: 0,
-                enven:'',
-                queryForm:{
-                    name:'',
+                enven: '',
+                queryForm: {
+                    name: '',
                     userName: ''
                 },
             }
         },
-        mounted(){
-            this.getEvenData()
-            this.list(this.pageNo)
-            getNewBlogTop().then(data=>{
-                this.articleTops =data.data
-            })
+        created() {
+            // this.getEvenData()
+            this.getToppedArticleList()
+            this.getPaginatedArticlesList(this.current)
         },
         methods:{
+            getPaginatedArticlesList(current) {
+                articleApi.getPaginatedArticlesList(current, this.limit)
+                    .then(response => {
+                        this.articles = response.data.records
+                        console.log(this.articles)
+                        this.total = response.data.total
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            getToppedArticleList() {
+                articleApi.getToppedArticleList()
+                    .then(response =>{
+                        this.toppedArticle = response.data
+                    }).catch(error=>{
+                        console.log(error)
+                    })
+            },
             handleCurrentChange(val){
-                this.pageNo=val
+                this.current = val
+
                 if (this.truth) {
                     this.getSearchPage(val)
                 }else {
-                    this.list(this.pageNo)
+                    this.getPaginatedArticlesList(this.current)
                 }
-            },
-            list(param){
-                getPageList(param).then(data=>{
-                    this.articles=data.list
-                    this.total=data.total
-                }).catch(error=>{
-                    this.$message.error(error)
-                })
             },
             searchPage(param){
                 search(param).then(data=>{
@@ -135,9 +177,4 @@
     }
 </script>
 
-<style scoped>
-
-
-
-
-</style>
+<style scoped/>

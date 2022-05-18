@@ -6,7 +6,8 @@ import router from './router'
 
 //element ui
 import Element from 'element-ui'
-import  'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/en'
 
 // import utils from './utils'
 
@@ -27,7 +28,7 @@ Vue.use(VueMarkdownEditor)
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
-Vue.use(Element)
+Vue.use(Element, {locale})
 Vue.config.productionTip = false
 // Vue.prototype.utils=utils
 
