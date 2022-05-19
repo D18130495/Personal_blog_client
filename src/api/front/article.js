@@ -18,5 +18,17 @@ export default {
       url: `front/article/getPaginatedArticlesList/${current}/${limit}`,
       method: 'get'
     })
+  },
+  getNoticeByChannelId(channelId) {
+    return request({
+      url: `front/article/getNoticeByChannelId/${channelId}`,
+      method: 'get'
+    })
+  },
+  getArticleByViewTime() {
+    return request({
+      url: `front/article/getArticleByViewTime`,
+      method: 'get'
+    })
   }
 }

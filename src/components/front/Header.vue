@@ -71,7 +71,7 @@
             }
         },
         created() {
-            this.getHeaderTag()
+            this.getChannelA()
         },
         mounted() {
             $("#mnavh").click(function() {
@@ -90,7 +90,7 @@
             })
         },
         methods:{
-            getHeaderTag() {
+            getChannelA() {
                 channelApi.getChannelByPos('a')
                     .then(response =>{
                         this.channels = response.data

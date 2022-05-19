@@ -20,7 +20,7 @@ import  VueRouter from 'vue-router'
 
 import Index from  '../views/front/Index'
 // import List from  '../views/front/List'
-// import Detail from  '../views/front/Detail'
+import Detail from  '../views/front/Detail'
 // import ChannelDetail from  '../views/front/ChannelDetail'
 // import TagList from  '../views/front/TagList'
 
@@ -39,8 +39,7 @@ const router=new VueRouter({
             meta:{
                 requireLogin: false
             }
-        }
-        // },
+        },
         // {
         //     path: '/content',
         //     name: 'fIndex',
@@ -58,14 +57,14 @@ const router=new VueRouter({
         //         requireLogin: false
         //     }
         // },
-        // {
-        //     path: '/detail/:id',
-        //     name: 'detail',
-        //     component: Detail,
-        //     meta:{
-        //         requireLogin: false
-        //     }
-        // },
+        {
+            path: '/detail/:id',
+            name: 'Detail',
+            component: Detail,
+            meta:{
+                requireLogin: false
+            }
+        },
         // {
         //     path: '/channel_detail/:id',
         //     name: 'channel_detail',

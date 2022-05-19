@@ -3,35 +3,51 @@
     <div>
         <div class="ad whitebg imgscale">
             <ul>
-                <a href="/"><img src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/b156d96ce7264322a6179e2f614ca205.jpg"></a>
+                <a href="/">
+                    <img src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/b156d96ce7264322a6179e2f614ca205.jpg">
+                </a>
             </ul>
         </div>
 
         <div class="links whitebg">
-            <h2 class="htitle"><span class="sqlink"></span>友情链接</h2>
+            <h2 class="htitle">
+                <span class="sqlink"/>
+                Related Links
+            </h2>
             <ul>
-                <li v-for="(item,index) in friendLink" :key="index">
-                    <a :href="item.url" target="_blank">{{item.title}}</a></li>
-
+                <li v-for="(friendLink, index) in friendLinks" :key="index">
+                    <a :href="friendLink.url" target="_blank">
+                        {{ friendLink.title }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 </template>
 
 <script>
-    // import {getListLink} from "@/api/friendLink"
+    import frendLinkApi from '@/api/front/friendLink'
 
     export default {
         name: "FriendLink",
         data(){
             return{
-                friendLink: []
+                friendLinks: []
             }
         },
         created() {
-            getListLink().then(data=>{
-                this.friendLink=data.data
-            })
+            this.getAllFriendLinkList()
+        },
+        methods: {
+            getAllFriendLinkList() {
+                frendLinkApi.getAllFriendLinkList()
+                    .then(response => {
+                        this.friendLinks = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
         }
     }
 </script>

@@ -1,35 +1,44 @@
 <template>
     <div class="whitebg notice">
-        <h2 class="htitle">{{channels.name}}</h2>
+        <h2 class="htitle">{{ channel.name }}</h2>
         <ul>
-            <li v-for="(item,index) in articles" :key="index">
-                <router-link :to='"/detail/"+item.id' target="_blank">{{item.title}}</router-link></li>
+            <li v-for="(article, index) in articles" :key="index">
+                <router-link :to='"/detail/" + article.id' target="_blank">
+                    {{ article.title }}
+                </router-link>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
-    // import {queryByPos,getNotice} from '@/api/front'
+    import articleApi from '@/api/front/article'
+    import channelApi from '@/api/front/channel'
 
     export default {
         name: "Notice",
-        data(){
+        data() {
             return{
                 articles:[],
-                channels: {}
+                channel: {}
             }
         },
-        mounted() {
-            queryByPos('c').then(data=>{
-                let  arr =data.data
-                this.channels=arr[0]
-                getNotice(this.channels.id).then(data=>{
-                    this.articles=data.data
-                })
-
-            }).catch(error=>{
-
-            })
+        created() {
+            this.getChannelC()
+        },
+        methods: {
+            getChannelC() {
+                channelApi.getChannelByPos('c')
+                    .then(response => {
+                        this.channel = response.data[0]
+                        articleApi.getNoticeByChannelId(this.channel.id)
+                            .then(response => {
+                                this.articles = response.data
+                            })
+                    }).catch(error=>{
+                        console.log(error)
+                    })
+            }       
         }
     }
 </script>
