@@ -7,7 +7,7 @@
             </router-link>
         </section>
         <ul>
-            <li v-for="(article, index) in articles.slice(0,8)" :key="index">
+            <li v-for="(article, index) in articles.slice(0, 8)" :key="index">
                 <i></i>
                 <router-link :to='"/detail/" + article.id' target="_blank">{{ article.title }}</router-link>
             </li>

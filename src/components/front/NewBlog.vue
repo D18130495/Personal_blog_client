@@ -4,7 +4,7 @@
         <ul>
             <li v-for="(article, index) in toppedArticle" :key="index.id">
                 <h3 class="blogtitle">
-                    <router-link :to='"/detail/" + article.id'  arget="_blank">
+                    <router-link :to='"/detail/" + article.id' target="_blank">
                         <b>【Topped】</b>
                         {{ article.title }}
                     </router-link>

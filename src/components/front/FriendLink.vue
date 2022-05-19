@@ -16,7 +16,7 @@
             </h2>
             <ul>
                 <li v-for="(friendLink, index) in friendLinks" :key="index">
-                    <a :href="friendLink.url" target="_blank">
+                    <a :href="friendLink.url" :target="friendLink.target">
                         {{ friendLink.title }}
                     </a>
                 </li>

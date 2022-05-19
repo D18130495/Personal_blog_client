@@ -9,10 +9,10 @@
             </div>
 
             <div class="endnav">
-                <p><b>站点声明</b></p>
+                <!-- <p><b>站点声明</b></p>
                 <p>1. 本博客采用springBoot+Vue技术编写完成 </p>
                 <p>2. 本站站主Lyu、本站仅为学习采用</p>
-                <p>Copyright © 2022</p>
+                <p>Copyright © 2022</p> -->
             </div>
         </div>
 

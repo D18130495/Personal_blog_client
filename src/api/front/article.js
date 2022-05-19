@@ -30,5 +30,11 @@ export default {
       url: `front/article/getArticleByViewTime`,
       method: 'get'
     })
+  },
+  getRecommendedArticle(articleId) {
+    return request({
+      url: `front/article/getRecommendedArticle/${articleId}`,
+      method: 'get'
+    })
   }
 }

@@ -53,12 +53,12 @@
                 </div>
            </div> -->
 
-            <!-- <div class="rbox">
-                <Order></Order>
-                <Like></Like>
-                <Tag></Tag>
-                <FriendLink></FriendLink>
-            </div> -->
+            <div class="rbox">
+                <Order/>
+                <Like/>
+                <Tag/>
+                <FriendLink/>
+            </div>
         </article>
         <Footer/>
     </div>
@@ -68,12 +68,12 @@
     import '@/assets/css/base.css'
     import '@/assets/css/m.css'
     import Header from "../../components/front/Header"
-    // import Order from "../../components/front/Order";
-    // import FriendLink from "../../components/front/FriendLink";
-    import Footer from "../../components/front/Footer"
-    // import Like from  '../../components/front/Like'
-    // import Tag from "../../components/front/Tag";
     // import Form from "../../components/front/Form";
+    import Order from "../../components/front/Order"
+    import Like from  '../../components/front/Like'
+    import Tag from "../../components/front/Tag"
+    import FriendLink from "../../components/front/FriendLink"
+    import Footer from "../../components/front/Footer"
 
     // import {getArticle,getCommentArticle} from "../../api/front";
     
@@ -82,9 +82,11 @@
         components: {
             Header, 
             // Form,
-            // Tag, 
-            Footer,
-            // FriendLink, Order, Like
+            Order,
+            Like,
+            Tag,
+            FriendLink,
+            Footer
         },
         data(){
             return{
@@ -95,7 +97,7 @@
             }
         },
         created(){
-            console.log(this.$route.params.id)
+            // console.log(this.$route.params.id)
             getArticle(this.$route.params.id).then(data=>{
                 console.log(data.data)
                 if(data){

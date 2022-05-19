@@ -169,7 +169,7 @@ a.viewmore { display: block; right: 10px; bottom: 20px; position: absolute; padd
 .links li:hover { background: #f7f7f7 }
 /*rbox*/
 .rbox { width: 23.5%; float: right; overflow: hidden; margin-top: 25px }
-.card { box-shadow: 0px 1px 0px rgba(0, 139, 139, 0.1), inset 0px 1px 1px rgba(0, 139, 139, 0.7); border-radius: 3px; background: url(../images/quote-bg.png) no-repeat top right rgb(0, 139, 139); height: 260px; overflow: hidden; margin-bottom: 20px;}
+.card { box-shadow: 0px 1px 0px rgba(0, 139, 139, 0.1), inset 0px 1px 1px rgba(0, 139, 139, 0.7); border-radius: 3px; background: url(../images/quote-bg.png) no-repeat top right #7B68EE; height: 260px; overflow: hidden; margin-bottom: 20px;}
 .card h2 { font-size: 22px; margin: 10px; color: #f8f8f8; font-weight: normal; padding-bottom: 10px; }
 .card p { font-size: 14px; padding: 0 0 0 20px; line-height: 28px; text-shadow: 0px 1px 2px rgba(0,0,0,.5); color: #d0d2d4; -webkit-animation: animations2 5s ease-in-out 5s; -moz-animation: animations2 5s ease-in-out 5s; -o-animation: animations2 5s ease-in-out 5s; -ms-animation: animations2 5s ease-in-out 5s; animation: animations2 5s ease-in-out 5s; }
 .linkmore { margin: 15px }
