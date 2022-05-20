@@ -3,7 +3,7 @@
         <h2 class="htitle">Most Viewed</h2>
         <section class="topnews imgscale">
             <router-link :to='"/detail/" + article.id' target="_blank">
-                <img src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/043a9cdba949490d9f57239da84cb3c2.jpg"><span>{{ article.title }}</span>
+                <img src=""><span>{{ article.title }}</span>
             </router-link>
         </section>
         <ul>

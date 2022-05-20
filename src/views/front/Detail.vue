@@ -1,5 +1,5 @@
 <template>
-    <div v-title data-title="文章">
+    <div v-title data-title="Article">
         <Header/>
         <article>
            <div class="lbox">
@@ -11,9 +11,13 @@
                                     Home
                                 </a>
                                 &gt;
-                                <a href="/">
+                                <router-link :to='"/list/" + channel.id'>
+                                    {{ channel.name }}
+                                </router-link>
+                                &gt;
+                                <router-link :to='"/detail/" + article.id'>
                                     {{ article.title }}
-                                </a>
+                                </router-link>
                         </span>
                         Article
                     </h2>
@@ -60,29 +64,32 @@
                             </div>
                         </li>
 
-                        <!-- <li class="comment fadeInUp" id="comment-2044"
-                            v-for=" (item,index) in comments" :key="index">
+                        <li class="comment fadeInUp" id="comment-2044"
+                            v-for=" (comment, index) in comments" :key="index">
                             <div id="div-comment-2044" class="comment-body">
                                 <div class="comment-author vcard">
-                                        <img class="avatarss" src="https://oss.liuyanzhao.com/avatar/84.jpg" alt="avatar">
-                                        <div  style="margin-left: 90px">
-                                            <a href="/author/aaaaaaaaaaaa@qq.com.html" target="_blank"><strong>{{item.author}}</strong></a>
-                                            <span class="comment-meta commentmetadata">
-                                                <a href="#comment-2383"></a><br>
-                                                <span class="comment-aux">
-                                                    {{item.createDate}}
-                                                    2019年03月22日 15:09:58
-                                                    <a class="comment-edit-link" href="#">编辑</a>
-                                                </span>
+                                    <img class="avatarss" src="https://oss.liuyanzhao.com/avatar/84.jpg" alt="avatar"/>
+                                    <div style="margin-left: 90px">
+                                        <a href="/author/aaaaaaaaaaaa@qq.com.html" target="_blank">
+                                            <strong>{{ comment.author }}</strong>
+                                        </a>
+                                        
+                                        <span class="comment-meta commentmetadata">
+                                            <a href="#comment-2383"/><br>
+                                            <span class="comment-aux">
+                                                {{ comment.createTime }}
+                                                <a class="comment-edit-link" href="#">Edit</a>
                                             </span>
-                                        <p>{{item.content}}</p>
+                                        </span>
+
+                                        <p>{{ comment.content }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div id="anchor-2044"></div>
                             <ul class="children">
                             </ul>
-                        </li> -->
+                        </li>
                     </ol>
                 </div>
            </div>
@@ -109,8 +116,9 @@
     import FriendLink from "../../components/front/FriendLink"
     import Footer from "../../components/front/Footer"
 
-    // import {getArticle,getCommentArticle} from "../../api/front";
     import articleApi from '@/api/front/article'
+    import channelApi from '@/api/front/channel'
+    import commentApi from '@/api/front/comment'
     
     export default {
         name: "Detail",
@@ -128,6 +136,8 @@
                 article: {},
                 user: [],
                 comments:[],
+                channel: {},
+                channelId : '',
                 xx: true
             }
         },
@@ -148,6 +158,8 @@
         },
         created(){
             this.getArticle()
+            this.getArticleAllComments()
+            this.getChannelIdByArticleId()
         },
         methods:{
             getArticle() {
@@ -160,9 +172,32 @@
                         console.log(error)
                     })
             },
-            // getCommentArticle(this.$route.params.id).then(data=>{
-            //     this.comments=data.data
-            // })
+            getArticleAllComments() {
+                commentApi.getArticleAllComments(this.$route.params.id)
+                    .then(response => {
+                        this.comments = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            getChannelIdByArticleId() {
+                articleApi.getArticleById(this.$route.params.id)
+                    .then(response => {
+                        this.channelId = response.data.channelId
+                        this.getChannelByChannelId()
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            getChannelByChannelId() {
+                channelApi.getChannelByChannelId(this.channelId)
+                    .then(response => {
+                        this.channel = response.data
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            }
         }
     }
 </script>

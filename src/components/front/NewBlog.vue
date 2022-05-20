@@ -2,7 +2,7 @@
     <div class="whitebg bloglist" >
         <h2 class="htitle" >Latest</h2>
         <ul>
-            <li v-for="(article, index) in toppedArticle" :key="index.id">
+            <li v-for="(article, index) in toppedArticles" :key="index.id">
                 <h3 class="blogtitle">
                     <router-link :to='"/detail/" + article.id' target="_blank">
                         <b>【Topped】</b>
@@ -103,7 +103,7 @@
         data(){
             return{
                 articles: [],
-                toppedArticle: [],
+                toppedArticles: [],
                 searchs: [],
                 truth: false,
                 page: '',
@@ -137,7 +137,7 @@
             getToppedArticleList() {
                 articleApi.getToppedArticleList()
                     .then(response =>{
-                        this.toppedArticle = response.data
+                        this.toppedArticles = response.data
                     }).catch(error=>{
                         console.log(error)
                     })

@@ -13,14 +13,14 @@
                         <li>
                             <a href="/">Home</a>
                         </li>
-                        <li v-for="(item, index) in channels" :key="index" :class="{menu: item.children}">
-                            <router-link v-if="item.single"  :to='"/channel_detail/" + item.id'>{{item.name}}</router-link>
-                            <router-link v-else :to='"/list/" + item.id'>{{item.name}}</router-link>
+                        <li v-for="(channel, index) in channels" :key="index" :class="{menu: channel.children}">
+                            <router-link v-if="channel.single"  :to='"/channel_detail/" + channel.id' target="_blank">{{ channel.name }}</router-link>
+                            <router-link v-else :to='"/list/" + channel.id' target="_blank">{{ channel.name }}</router-link>
 
-                            <ul class="sub" v-if="item.children">
-                                <li v-for="(sub,sindex) in item.children" :key="sindex">
-                                    <router-link v-if="sub.single" :to='"/channel_detail/"+sub.id'>{{sub.name}}</router-link>
-                                    <router-link v-else :to='"/list/"+sub.id'>{{sub.name}}</router-link>
+                            <ul class="sub" v-if="channel.children">
+                                <li v-for="(sub, sindex) in channel.children" :key="sindex">
+                                    <router-link v-if="sub.single" :to='"/channel_detail/"+sub.id'>{{ sub.name }}</router-link>
+                                    <router-link v-else :to='"/list/"+sub.id' target="_blank">{{ sub.name }}</router-link>
                                 </li>
                             </ul>
                         </li>

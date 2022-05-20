@@ -22,13 +22,17 @@
             }
         },
         beforeRouteUpdate(to, from ,next){
-            getLikeArticle(to.$route.params.id).then(data=>{
-                this.articles=data.data.articleVo
-            })
-            this.xx = false;
+            articleApi.getRecommendedArticle(to.$route.params.id)
+                .then(response => {
+                    this.articles = response.data.articleVo
+                })
+
+            this.xx = false
+            
             this.$nextTick(() => {
                 this.xx = true
             })
+            
             next()
         },
         created() {

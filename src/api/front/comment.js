@@ -7,5 +7,11 @@ export default {
         method: 'get',
         params: commentObj
     })
+  },
+  getArticleAllComments(articleId) {
+    return request({
+        url: `/front/comment/getArticleAllComments/${articleId}`,
+        method: 'get'
+    })
   }
 }

@@ -4,7 +4,7 @@
         <div class="ad whitebg imgscale">
             <ul>
                 <a href="/">
-                    <img src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/b156d96ce7264322a6179e2f614ca205.jpg">
+                    <img src="">
                 </a>
             </ul>
         </div>

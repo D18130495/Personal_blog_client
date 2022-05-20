@@ -19,7 +19,7 @@ import  VueRouter from 'vue-router'
 // import  ArticleEdit from '../views/admin/article/Edit'
 
 import Index from  '../views/front/Index'
-// import List from  '../views/front/List'
+import List from  '../views/front/List'
 import Detail from  '../views/front/Detail'
 // import ChannelDetail from  '../views/front/ChannelDetail'
 // import TagList from  '../views/front/TagList'
@@ -31,7 +31,6 @@ Vue.use(VueRouter)
 const router=new VueRouter({
     // mode: 'history',
     routes:[
-
         {
             path: '/',
             name: 'Index',
@@ -48,15 +47,14 @@ const router=new VueRouter({
         //         requireLogin: false
         //     }
         // },
-
-        // {
-        //     path: '/list/:id',
-        //     name: 'list_id',
-        //     component: List,
-        //     meta:{
-        //         requireLogin: false
-        //     }
-        // },
+        {
+            path: '/list/:id',
+            name: 'List',
+            component: List,
+            meta:{
+                requireLogin: false
+            }
+        },
         {
             path: '/detail/:id',
             name: 'Detail',

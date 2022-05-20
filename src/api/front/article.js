@@ -42,5 +42,5 @@ export default {
       url: `front/article/getArticleById/${articleId}`,
       method: 'get'
     })
-  },
+  }
 }

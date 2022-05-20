@@ -12,5 +12,17 @@ export default {
         url: `front/channel/getArticleByChannelId/${channelId}`,
         method: 'get'
       })
+    },
+    getChannelByChannelId(channelId) {
+      return request({
+        url: `front/channel/getChannelByChannelId/${channelId}`,
+        method: 'get'
+      })
+    },
+    getPaginatedChannelArticleByChannelId(current, limit, channelId) {
+      return request({
+        url: `front/channel/getPaginatedChannelArticleByChannelId/${current}/${limit}/${channelId}`,
+        method: 'get'
+      })
     }
 }
