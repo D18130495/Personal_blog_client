@@ -2,56 +2,90 @@
     <div v-title data-title="文章">
         <Header/>
         <article>
-           <!--  <div class="lbox">
+           <div class="lbox">
                 <div class="content_box whitebg">
-                    <h2 class="htitle"><span class="con_nav">您现在的位置是：<a href="/">首页</a>&gt;<a href="/">{{articles.title}}</a></span>正文</h2>
-                    <h1 class="con_tilte">{{articles.title}}</h1>
-                    <p class="bloginfo"><i class="avatar"><img :src="user.avatar"></i><span>{{user.nickName}}</span><span>{{articles.createDate}}</span><span>{{articles.articleView}}人已观看</span></p>
-                    <p class="con_info"><b>摘要</b>{{articles.summary}}</p>
-                    <div class="con_text">
-                        <v-md-preview :text="articles.content"></v-md-preview>
-                    </div>
+                    <h2 class="htitle">
+                        <span class="con_nav">
+                            Location:
+                                <a href="/">
+                                    Home
+                                </a>
+                                &gt;
+                                <a href="/">
+                                    {{ article.title }}
+                                </a>
+                        </span>
+                        Article
+                    </h2>
+                    
+                    <h1 class="con_tilte">{{ article.title }}</h1>
+                    
+                    <p class="bloginfo">
+                        <i class="avatar">
+                            <img :src="user.avatar">
+                        </i>
+                        <span>
+                            {{ user.nickName }}
+                        </span>
+                        <span>
+                            {{ article.createTime }}
+                        </span>
+                        <span>
+                            {{ article.articleView }}
+                            Views
+                        </span>
+                    </p>
 
+                    <p class="con_info">
+                        <b>摘要</b>
+                        {{ article.summary }}
+                    </p>
+
+                    <div class="con_text">
+                        <v-md-preview :text="article.content"></v-md-preview>
+                    </div>
                 </div>
 
-                <div id="comments" class="comments-area" v-if="articles.commentStatus==0 || articles.commentStatus==null">
+                <div id="comments" class="comments-area" v-if="article.commentStatus == 0 || article.commentStatus == null">
                     <ol class="comment-list">
                         <li class="comments-anchor">
-                            <!--<ul id="anchor-comment-40">-->
-                                <!---->
-                            <!--</ul>-->
-                            <!--<div id="respond" class="comment-respond">
-                                <h3 id="reply-title" class="comment-reply-title"><span id="reply-title-word">发表评论</span></h3>
+                            <ul id="anchor-comment-40"/>
+                            <div id="respond" class="comment-respond">
+                                <h3 id="reply-title" class="comment-reply-title">
+                                    <span id="reply-title-word">
+                                        Comments
+                                    </span>
+                                </h3>
                                 <Form></Form>
                             </div>
                         </li>
 
-                            <li class="comment fadeInUp" id="comment-2044"
-                                v-for=" (item,index) in comments" :key="index">
-                                <div id="div-comment-2044" class="comment-body">
-                                    <div class="comment-author vcard">
-                                            <img class="avatarss" src="https://oss.liuyanzhao.com/avatar/84.jpg" alt="avatar">
-                                            <div  style="margin-left: 90px">
-                                                <a href="/author/aaaaaaaaaaaa@qq.com.html" target="_blank"><strong>{{item.author}}</strong></a>
-                                                <span class="comment-meta commentmetadata">
-                                                    <a href="#comment-2383"></a><br>
-                                                    <span class="comment-aux">
-                                                        {{item.createDate}}
-                                                        <!--2019年03月22日 15:09:58-->
-                                                        <!--                                        <a class="comment-edit-link" href="#">编辑</a>-->
-                                                    <!--</span>
+                        <!-- <li class="comment fadeInUp" id="comment-2044"
+                            v-for=" (item,index) in comments" :key="index">
+                            <div id="div-comment-2044" class="comment-body">
+                                <div class="comment-author vcard">
+                                        <img class="avatarss" src="https://oss.liuyanzhao.com/avatar/84.jpg" alt="avatar">
+                                        <div  style="margin-left: 90px">
+                                            <a href="/author/aaaaaaaaaaaa@qq.com.html" target="_blank"><strong>{{item.author}}</strong></a>
+                                            <span class="comment-meta commentmetadata">
+                                                <a href="#comment-2383"></a><br>
+                                                <span class="comment-aux">
+                                                    {{item.createDate}}
+                                                    2019年03月22日 15:09:58
+                                                    <a class="comment-edit-link" href="#">编辑</a>
                                                 </span>
-                                            <p>{{item.content}}</p>
-                                        </div>
+                                            </span>
+                                        <p>{{item.content}}</p>
                                     </div>
                                 </div>
-                                <div id="anchor-2044"></div>
-                                <ul class="children">
-                                </ul>
-                            </li>
+                            </div>
+                            <div id="anchor-2044"></div>
+                            <ul class="children">
+                            </ul>
+                        </li> -->
                     </ol>
                 </div>
-           </div> -->
+           </div>
 
             <div class="rbox">
                 <Order/>
@@ -68,7 +102,7 @@
     import '@/assets/css/base.css'
     import '@/assets/css/m.css'
     import Header from "../../components/front/Header"
-    // import Form from "../../components/front/Form";
+    import Form from "../../components/front/Form"
     import Order from "../../components/front/Order"
     import Like from  '../../components/front/Like'
     import Tag from "../../components/front/Tag"
@@ -76,12 +110,13 @@
     import Footer from "../../components/front/Footer"
 
     // import {getArticle,getCommentArticle} from "../../api/front";
+    import articleApi from '@/api/front/article'
     
     export default {
         name: "Detail",
         components: {
             Header, 
-            // Form,
+            Form,
             Order,
             Like,
             Tag,
@@ -90,42 +125,44 @@
         },
         data(){
             return{
-                articles: {},
+                article: {},
                 user: [],
                 comments:[],
                 xx: true
             }
         },
-        created(){
-            // console.log(this.$route.params.id)
-            getArticle(this.$route.params.id).then(data=>{
-                console.log(data.data)
-                if(data){
-                    this.articles =data.data
-                    this.user=data.data.user
-                }
-            }).catch(error=>{
-                this.$message.error(error)
-            })
-            getCommentArticle(this.$route.params.id).then(data=>{
-                this.comments=data.data
-            })
-        },
-        beforeRouteUpdate(to,from ,next){
-            getArticle(to.params.id).then(data=>{
-                if(data){
-                    this.articles =data.data
-                    this.user=data.data.user
-                }
-            })
-            this.xx = false;
+        beforeRouteUpdate(to, from, next){
+            articleApi.getArticleById(to.params.id)
+                .then(response => {
+                    this.article = response.data
+                    this.user = response.data.user
+                })
+            
+            this.xx = false
+            
             this.$nextTick(() => {
                 this.xx = true
             })
+            
             next()
         },
+        created(){
+            this.getArticle()
+        },
         methods:{
-
+            getArticle() {
+                articleApi.getArticleById(this.$route.params.id)
+                    .then(response => {
+                        this.article = response.data
+                        this.user = response.data.user
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            // getCommentArticle(this.$route.params.id).then(data=>{
+            //     this.comments=data.data
+            // })
         }
     }
 </script>

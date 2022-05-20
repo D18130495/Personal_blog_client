@@ -36,5 +36,11 @@ export default {
       url: `front/article/getRecommendedArticle/${articleId}`,
       method: 'get'
     })
-  }
+  },
+  getArticleById(articleId) {
+    return request({
+      url: `front/article/getArticleById/${articleId}`,
+      method: 'get'
+    })
+  },
 }
