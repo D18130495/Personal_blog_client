@@ -27,7 +27,6 @@
                 tagApi.getAllTag()
                     .then(response => {
                         this.tags = response.data
-                        console.log(this.tags)
                     })
                     .catch(error =>{
                         console.log(error)

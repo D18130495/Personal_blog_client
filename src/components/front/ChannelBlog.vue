@@ -11,7 +11,7 @@
                         {{ channel.name }}
                     </router-link>
             </span>
-            {{ channel.name }} Related Article
+            {{ channel.name }}
         </h2>
 
         <ul>
@@ -114,7 +114,7 @@
         },
         methods: {
             getToppedArticleList() {
-                articleApi.getToppedArticleList()
+                articleApi.getToppedArticleListByChannelId(this.channelId)
                     .then(response =>{
                         this.toppedArticles = response.data
                     }).catch(error=>{

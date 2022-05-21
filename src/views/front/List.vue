@@ -3,7 +3,7 @@
         <Header></Header>
         <article>
             <div class="lbox">
-                <!-- <ChannelInfo :channel="channel"/> -->
+                <ChannelInfo :channel = "channel"/>
                 <ChannelBlog v-if="xx"/>
             </div>
             <div class="rbox">
@@ -20,14 +20,14 @@
     import  '@/assets/css/base.css'
     import  '@/assets/css/m.css'
     import Header from "../../components/front/Header"
-    // import ChannelInfo from '../../components/front/ChannelInfo'
+    import ChannelInfo from '../../components/front/ChannelInfo'
     import ChannelBlog from "../../components/front/ChannelBlog"
     import Order from "../../components/front/Order"
     import Tag from "../../components/front/Tag"
     import FriendLink from "../../components/front/FriendLink"
     import Footer from "../../components/front/Footer"
     
-    // import  {get} from "@/api/front";
+    import channelApi from '@/api/front/channel'
     
     export default {
         name: "List",
@@ -40,7 +40,7 @@
         },
         components: {
             Header,
-            // ChannelInfo,
+            ChannelInfo,
             ChannelBlog,
             Order,
             Tag,
@@ -48,23 +48,24 @@
             Footer
         },
         created(){
-        //  this.getChannel(this.$route.params.id)
+            this.getChannelById()
         },
-        beforeRouteUpdate(to, from ,next){
-            this.channelId= to.params.id
+        beforeRouteUpdate(to, from, next){
+            this.channelId = to.params.id
             this.getChannel(to.params.id)
-            this.xx = false;
+            this.xx = false
             this.$nextTick(() => {
                 this.xx = true
             })
             next()
         },
         methods:{
-            getChannel(id){
-                get(id).then(data=>{
-                    this.channel=data.data
-                })
-            },
+            getChannelById() {
+                channelApi.getChannelByChannelId(this.$route.params.id)
+                    .then(response => {
+                        this.channel = response.data
+                    })
+            }
         }
     }
 </script>

@@ -13,6 +13,12 @@ export default {
       method: 'get'
     })
   },
+  getToppedArticleListByChannelId(channelId) {
+    return request({
+      url: `front/article/getToppedArticleListByChannelId/${channelId}`,
+      method: 'get'
+    })
+  },
   getPaginatedArticlesList(current, limit) {
     return request({
       url: `front/article/getPaginatedArticlesList/${current}/${limit}`,

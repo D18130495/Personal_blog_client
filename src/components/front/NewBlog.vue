@@ -128,7 +128,6 @@
                 articleApi.getPaginatedArticlesList(current, this.limit)
                     .then(response => {
                         this.articles = response.data.records
-                        console.log(this.articles)
                         this.total = response.data.total
                     }).catch(error => {
                         console.log(error)
