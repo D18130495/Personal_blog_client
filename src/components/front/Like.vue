@@ -21,7 +21,7 @@
                 articles: []
             }
         },
-        beforeRouteUpdate(to, from ,next){
+        beforeRouteUpdate(to, from, next){
             articleApi.getRecommendedArticle(to.$route.params.id)
                 .then(response => {
                     this.articles = response.data.articleVo

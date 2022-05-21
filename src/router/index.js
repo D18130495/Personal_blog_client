@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
 import  VueRouter from 'vue-router'
-// import Login from '../views/admin/Login'
-// import Index from "../views/admin/Index";
-// import User from "../views/admin/user/Index";
+import Login from '../views/admin/Login'
+import BIndex from "../views/admin/Index"
+import User from "../views/admin/user/Index"
 // import Tag from "../views/admin/tag/Index";
 // import Channel from "../views/admin/channel/Index";
 // import FriendLink from "../views/admin/friendlink/Index";
@@ -18,23 +18,23 @@ import  VueRouter from 'vue-router'
 // import  ArticleAdd from '../views/admin/article/Add'
 // import  ArticleEdit from '../views/admin/article/Edit'
 
-import Index from  '../views/front/Index'
+import FIndex from  '../views/front/Index'
 import List from  '../views/front/List'
 import Detail from  '../views/front/Detail'
 import ChannelDetail from  '../views/front/ChannelDetail'
 import TagList from  '../views/front/TagList'
 
-// import token from '../store/token'
+import token from '../store/token'
 
 Vue.use(VueRouter)
 
-const router=new VueRouter({
-    // mode: 'history',
+const router = new VueRouter({
+    mode: 'history',
     routes:[
         {
             path: '/',
             name: 'Index',
-            component: Index,
+            component: FIndex,
             meta:{
                 requireLogin: false
             }
@@ -79,26 +79,26 @@ const router=new VueRouter({
                 requireLogin: false
             }
         },
-        // {
-        //   path: '/login',
-        //   name: 'login',
-        //   component:   Login
-        // },
-        // {
-        //     path: '/index',
-        //     name: 'index',
-        //     component:   Index,
-        //     children:[
-        //         {
-        //             path: '/info',
-        //             name :'info',
-        //             component: Info
-        //         },
-        //         {
-        //             path: '/user',
-        //             name :'User',
-        //             component: User
-        //         },
+        {
+          path: '/login',
+          name: 'login',
+          component: Login
+        },
+        {
+            path: '/index',
+            name: 'index',
+            component: BIndex,
+            children:[
+                // {
+                //     path: '/info',
+                //     name :'info',
+                //     component: Info
+                // },
+                {
+                    path: '/user',
+                    name: 'User',
+                    component: User
+                },
         //         {
         //             path: '/channel',
         //             name :'channel',
@@ -159,15 +159,14 @@ const router=new VueRouter({
         //             name :'comment_check',
         //             component: Check
         //         }
-        //     ]
-        // }
+            ]
+        }
     ]
 })
 
 
 // router.beforeEach((to, from, next) => {
-
-//     if (!to.matched.some(r=>r.meta.requireLogin)) {
+//     if (!to.matched.some(r => r.meta.requireLogin)) {
 //         next()
 //     }else {
 //         if (token.get()){
@@ -180,8 +179,6 @@ const router=new VueRouter({
 //             }
 //         }
 //     }
-
-
 // })
 
 export default  router

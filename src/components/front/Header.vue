@@ -24,7 +24,7 @@
                             </ul>
                         </li>
                         <li >
-                            <router-link to="/user" target="_blank">后台管理</router-link>
+                            <router-link to="/login" target="_blank">后台管理</router-link>
                         </li>
                     </ul>
                 </nav>
