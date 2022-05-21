@@ -19,6 +19,12 @@ export default {
       method: 'get'
     })
   },
+  getToppedArticleByTagId(tagId) {
+    return request({
+      url: `front/article/getToppedArticleByTagId/${tagId}`,
+      method: 'get'
+    })
+  },
   getPaginatedArticlesList(current, limit) {
     return request({
       url: `front/article/getPaginatedArticlesList/${current}/${limit}`,
@@ -46,6 +52,12 @@ export default {
   getArticleById(articleId) {
     return request({
       url: `front/article/getArticleById/${articleId}`,
+      method: 'get'
+    })
+  },
+  getPaginatedTagArticleByTagId(current, limit, tagId) {
+    return request({
+      url: `front/article/getPaginatedTagArticleByTagId/${current}/${limit}/${tagId}`,
       method: 'get'
     })
   }

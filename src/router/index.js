@@ -21,8 +21,8 @@ import  VueRouter from 'vue-router'
 import Index from  '../views/front/Index'
 import List from  '../views/front/List'
 import Detail from  '../views/front/Detail'
-// import ChannelDetail from  '../views/front/ChannelDetail'
-// import TagList from  '../views/front/TagList'
+import ChannelDetail from  '../views/front/ChannelDetail'
+import TagList from  '../views/front/TagList'
 
 // import token from '../store/token'
 
@@ -63,23 +63,22 @@ const router=new VueRouter({
                 requireLogin: false
             }
         },
-        // {
-        //     path: '/channel_detail/:id',
-        //     name: 'channel_detail',
-        //     component: ChannelDetail,
-        //     meta:{
-        //         requireLogin: false
-        //     }
-        // },
-
-        // {
-        //     path: '/tag_list/:id',
-        //     name: 'channel_detail',
-        //     component: TagList,
-        //     meta:{
-        //         requireLogin: false
-        //     }
-        // },
+        {
+            path: '/channel_detail/:id',
+            name: 'channel_detail',
+            component: ChannelDetail,
+            meta:{
+                requireLogin: false
+            }
+        },
+        {
+            path: '/tag_list/:id',
+            name: 'tag_list',
+            component: TagList,
+            meta:{
+                requireLogin: false
+            }
+        },
         // {
         //   path: '/login',
         //   name: 'login',

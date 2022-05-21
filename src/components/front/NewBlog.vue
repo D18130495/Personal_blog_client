@@ -106,9 +106,7 @@
                 toppedArticles: [],
                 searchs: [],
                 truth: false,
-                page: '',
                 current: 1,
-                pages: '',
                 limit: 5,
                 total: 0,
                 enven: '',
@@ -137,7 +135,7 @@
                 articleApi.getToppedArticleList()
                     .then(response =>{
                         this.toppedArticles = response.data
-                    }).catch(error=>{
+                    }).catch(error => {
                         console.log(error)
                     })
             },

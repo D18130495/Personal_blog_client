@@ -1,10 +1,16 @@
-<template>
+<template >
     <div v-title data-title="Channel">
         <Header></Header>
         <article>
             <div class="lbox">
-                <ChannelInfo :channel = "channel"/>
-                <ChannelBlog v-if="xx"/>
+                <div class="content_box whitebg">
+                    <h2 class="htitle">{{ channel.name }}</h2>
+
+                    <p class="con_info" v-if="channel.summary">{{ channel.summary }}</p>
+                    <div class="con_text">
+                        <v-md-preview :text="channel.content"></v-md-preview>
+                    </div>
+                </div>
             </div>
             <div class="rbox">
                 <Order/>
@@ -12,7 +18,7 @@
                 <FriendLink/>
             </div>
         </article>
-        <Footer></Footer>
+        <Footer/>
     </div>
 </template>
 
@@ -20,47 +26,36 @@
     import  '@/assets/css/base.css'
     import  '@/assets/css/m.css'
     import Header from "../../components/front/Header"
-    import ChannelInfo from '../../components/front/ChannelInfo'
-    import ChannelBlog from "../../components/front/ChannelBlog"
     import Order from "../../components/front/Order"
     import Tag from "../../components/front/Tag"
     import FriendLink from "../../components/front/FriendLink"
     import Footer from "../../components/front/Footer"
-    
+
     import channelApi from '@/api/front/channel'
     
     export default {
-        name: "List",
+        name: "Channel_Detail",
         components: {
             Header,
-            ChannelInfo,
-            ChannelBlog,
             Order,
-            Tag,
-            FriendLink,
+            Tag, 
+            FriendLink, 
             Footer
         },
         data() {
-          return{
-              channelId: 0,
-              channel: {},
-              xx:true,
-          }
+            return{
+                channel: {}
+            }
         },
         created() {
             this.getChannelById()
         },
         beforeRouteUpdate(to, from, next){
-            this.channelId = to.params.id
-            this.getChannel(to.params.id)
-            this.xx = false
-            this.$nextTick(() => {
-                this.xx = true
-            })
+            this.getChannelById(to.params.id)
             next()
         },
         methods: {
-            getChannelById() {
+           getChannelById() {
                 channelApi.getChannelByChannelId(this.$route.params.id)
                     .then(response => {
                         this.channel = response.data

@@ -19,8 +19,7 @@
 
                             <ul class="sub" v-if="channel.children">
                                 <li v-for="(sub, sindex) in channel.children" :key="sindex">
-                                    <router-link v-if="sub.single" :to='"/channel_detail/"+sub.id'>{{ sub.name }}</router-link>
-                                    <router-link v-else :to='"/list/"+sub.id' target="_blank">{{ sub.name }}</router-link>
+                                    <router-link :to='"/list/" + sub.id' target="_blank">{{ sub.name }}</router-link>
                                 </li>
                             </ul>
                         </li>

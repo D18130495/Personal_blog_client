@@ -7,57 +7,32 @@
                         Home
                     </a>
                     &gt;
-                    <router-link :to='"/list/" + channel.id'>
-                        {{ channel.name }}
+                    <router-link :to='"/tag_list/" + tag.id'>
+                        {{ tag.tagName }}
                     </router-link>
             </span>
-            {{ channel.name }} channel related articles
+            {{ tag.tagName }} tag related articles
         </h2>
 
         <ul>
-            <li v-for="(toppedArticle, index) in toppedArticles" :key="index.id">
-                <h3 class="blogtitle">
-                    <router-link :to='"/detail/" + toppedArticle.id' target="_blank">
-                        <b>【Topped】</b>
-                        {{ toppedArticle.title }}
-                    </router-link>
-                </h3>
-                
-                <span class="blogpic imgscale"><i><router-link :to='"/detail/" + toppedArticle.id'>{{ toppedArticle.channel.name}}</router-link></i>
-                    <router-link :to='"/detail/" + toppedArticle.id' target="_blank">
-                        <img v-if="toppedArticle.titleImg == null || toppedArticle.titleImg == '' " width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
-                        <img v-else :src="toppedArticle.titleImg" height="120px" alt="">
-                    </router-link>
-                </span>
-                
-                <p class="blogtext">{{ toppedArticle.summary }}</p>
-                
-                <p class="bloginfo">
-                    <i class="avatar"><img :src="toppedArticle.user.avatar"></i>
-                    <span>{{ toppedArticle.user.nickName }}</span>
-                    <span>{{ toppedArticle.createTime }}</span>
-                </p>
-                
-                <router-link :to='"/detail/" + toppedArticle.id' target="_blank" class="viewmore">More</router-link>
-            </li>
-
-            <li v-for="(article, index) in articles" :key="index">
+            <li v-for="(article, index) in toppedArticles" :key="index.id">
                 <h3 class="blogtitle">
                     <router-link :to='"/detail/" + article.id' target="_blank">
+                        <b>【Topped】</b>
                         {{ article.title }}
                     </router-link>
                 </h3>
-                
+
                 <span class="blogpic imgscale">
                     <i>
                         <router-link :to='"/detail/" + article.id' target="_blank">
                             {{ article.channel.name }}
                         </router-link>
                     </i>
-                    
+
                     <router-link :to='"/detail/" + article.id' target="_blank">
-                        <img v-if="article.titleImg == null || article.titleImg=='' " width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
-                        <img v-else  :src="article.titleImg"  height="120px" alt="">
+                        <img v-if="article.titleImg == null || article.titleImg == ''" width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
+                        <img v-else width="130px" height="130px" :src="article.titleImg" alt="">
                     </router-link>
                 </span>
 
@@ -67,7 +42,37 @@
                     <span>{{ article.user.nickName }}</span>
                     <span>{{ article.createTime }}</span>
                 </p>
-                <router-link :to='"/detail/" + article.id' target="_blank" class="viewmore"> More</router-link >
+                
+                <router-link :to='"/detail/" + article.id' target="_blank" class="viewmore">More</router-link>
+            </li>
+
+            <li v-for="(article, index) in articles" :key="index.id">
+                <h3 class="blogtitle">
+                    <router-link :to='"/detail/" + article.id' target="_blank">
+                        {{ article.title }}
+                    </router-link>
+                </h3>
+
+                <span class="blogpic imgscale">
+                    <i>
+                        <router-link :to='"/detail/" + article.id' target="_blank">
+                            {{ article.channel.name }}
+                        </router-link>
+                    </i>
+
+                    <router-link :to='"/detail/" + article.id' target="_blank">
+                        <img v-if="article.titleImg == null || article.titleImg == ''" width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
+                        <img v-else width="130px" height="130px" :src="article.titleImg" alt="">
+                    </router-link>
+                </span>
+
+                <p class="blogtext">{{ article.summary }}</p>
+                <p class="bloginfo">
+                    <i class="avatar"><img :src="article.user.avatar"></i>
+                    <span>{{ article.user.nickName }}</span>
+                    <span>{{ article.createTime }}</span>
+                </p>
+                <router-link :to='"/detail/" + article.id' target="_blank" class="viewmore">More</router-link>
             </li>
         </ul>
 
@@ -86,43 +91,38 @@
 
 <script>
     import articleApi from '@/api/front/article'
-    import channelApi from '@/api/front/channel'
+    import tagApi from '@/api/front/tag'
 
     export default {
-        name: "ChannelBlog",
-        data(){
+        name: "NewBlog",
+        data() {
             return{
                 articles: [],
-                channelId : '',
-                channel: {},
+                tag: [],
+                tagId: '',
                 toppedArticles: [],
                 current: 1,
-                limit: 1,
+                limit: 2,
                 total: 0,
             }
         },
-        beforeRouteUpdate(to, from, next){
-            this.channelId = to.params.id
-            this.getChannelArticleList()
-            next()
-        },
-        created() {
-            this.channelId = this.$route.params.id
+       created() {
+            this.tagId = this.$route.params.id
             this.getToppedArticleList()
-            this.getChannelArticleList()
-            this.getChannelByChannelId()
+            this.getTagArticleList()
+            this.getTagByTagId()
         },
         methods: {
             getToppedArticleList() {
-                articleApi.getToppedArticleListByChannelId(this.channelId)
-                    .then(response =>{
+                articleApi.getToppedArticleByTagId(this.tagId)
+                    .then(response => {
                         this.toppedArticles = response.data
-                    }).catch(error=>{
+                    }).catch(error => {
                         console.log(error)
                     })
             },
-            getChannelArticleList() {
-                channelApi.getPaginatedChannelArticleByChannelId(this.current, this.limit, this.channelId)
+            getTagArticleList() {
+                articleApi.getPaginatedTagArticleByTagId(this.current, this.limit, this.tagId)
                     .then(response => {
                         this.articles = response.data.records
                         this.total = response.data.total
@@ -130,19 +130,19 @@
                         console.log(error)
                     })
             },
-            getChannelByChannelId() {
-                channelApi.getChannelByChannelId(this.channelId)
+            getTagByTagId() {
+                tagApi.getTagByTagId(this.tagId)
                     .then(response => {
-                        this.channel = response.data
+                        this.tag = response.data
                     }).catch(error => {
                         console.log(error)
                     })
             },
-            handleCurrentChange(val){
+             handleCurrentChange(val){
                 this.current = val
-                this.getChannelArticleList()
-            }
-        }
+                this.getTagArticleList()
+            },
+        },
     }
 </script>
 

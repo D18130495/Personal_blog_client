@@ -41,7 +41,7 @@
                     </p>
 
                     <p class="con_info">
-                        <b>摘要</b>
+                        <b>Summary</b>
                         {{ article.summary }}
                     </p>
 
@@ -159,7 +159,6 @@
         created(){
             this.getArticle()
             this.getArticleAllComments()
-            this.getChannelIdByArticleId()
         },
         methods:{
             getArticle() {
@@ -167,6 +166,8 @@
                     .then(response => {
                         this.article = response.data
                         this.user = response.data.user
+                        this.channelId = response.data.channelId
+                        this.getChannelByChannelId()
                     })
                     .catch(error => {
                         console.log(error)
@@ -178,15 +179,6 @@
                         this.comments = response.data
                     })
                     .catch(error => {
-                        console.log(error)
-                    })
-            },
-            getChannelIdByArticleId() {
-                articleApi.getArticleById(this.$route.params.id)
-                    .then(response => {
-                        this.channelId = response.data.channelId
-                        this.getChannelByChannelId()
-                    }).catch(error => {
                         console.log(error)
                     })
             },
