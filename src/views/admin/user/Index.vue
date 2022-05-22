@@ -40,26 +40,26 @@
         </el-pagination>
 
         <el-dialog :visible.sync="addVisble" v-if="addVisble" :close-on-click-modal="false" width="35%">
-            <Add @after="addseach" @hideDialog="hidden"/>
+            <Add @after="addAndEditseach" @hideDialog="hidden"/>
         </el-dialog>
 
-        <!-- <el-dialog :visible.sync="editVisble" v-if="editVisble" :close-on-click-modal="false">
-            <Edit @after="search" :data="formData" @hideDialog="hidden"></Edit>
-        </el-dialog> -->
+        <el-dialog :visible.sync="editVisble" v-if="editVisble" :close-on-click-modal="false" width="35%">
+            <Edit @after="addAndEditseach" :data="formData" @hideDialog="hidden"/>
+        </el-dialog>
     </div>
 </template>
 
 <script>
     import userApi from '@/api/admin/user'
-    // import {query,del} from "../../../api/user"
+
     import Add from '@/views/admin/user/Add'
-    // import Edit from './Edit'
+    import Edit from '@/views/admin/user/Edit'
 
     export default {
         name: "User",
-        components:{
+        components: {
             Add,
-            // Edit
+            Edit
         },
         data() {
             return {
@@ -84,7 +84,6 @@
                 userApi.getUserQueryPaginatedList(this.current, this.limit, this.queryForm)
                     .then(response => {
                         this.tableData = response.data.records
-                        console.log(response.data)
                         this.total = response.data.total
                     }).catch(error => {
                         console.log(error)
@@ -92,6 +91,9 @@
             },
             search() {
                 this.current = 1
+                this.getAllUserPaginatedList()
+            },
+            addAndEditseach() {
                 this.getAllUserPaginatedList()
             },
             add() {
@@ -102,21 +104,19 @@
                 this.formData = row
             },
             del(row) {
-                this.$confirm('确定要删除'+row.userName+'用户吗？','提示').then(()=>{
-                    del (row.id).then(data=>{
-                        let param= this.queryForm
-                        param.page =this.pageNo
-                        this.list(param)
-                    }).catch(error=>{
-
-                        this.$message.error(error)
+                this.$confirm('Are you sure to delete ' + row.userName + '?', 'Inform')
+                    .then(() => {
+                        userApi.deleteUserById(row.id)
+                            .then(response => {
+                                this.$message.success(response.message)
+                                this.current = 1
+                                this.getAllUserPaginatedList()
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                    }).catch(error => {
+                        console.log(error)
                     })
-                }).catch(error=>{
-
-                })
-            },
-            addseach(){
-                this.getAllUserPaginatedList()
             },
             hidden() {
                 this.addVisble = false
@@ -125,7 +125,7 @@
             handleCurrentChange(val) {
                 this.current = val
                 this.getAllUserPaginatedList()
-            },
+            }
         }
     }
 </script>

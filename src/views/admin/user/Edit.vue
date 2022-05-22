@@ -1,17 +1,13 @@
 <template>
-    <el-row :gutter="15">
-        <div v-title data-title="HuaruoYM | New User">
+    <div v-title data-title="HuaruoYM | Edit User">
+        <el-row :gutter="15">
             <el-form ref="formData" :model="formData" :rules="rules" label-width="130px">
                 <el-form-item label="User Name" prop="userName" style=" width: 90%">
-                    <el-input v-model="formData.userName"  placeholder="Please enter username" clearable/>
-                </el-form-item>
-                
-                <el-form-item label="Nick Name" prop="nickName" style=" width: 90%">
-                    <el-input v-model="formData.nickName" placeholder="Please enter nickname" clearable/>
+                    <el-input v-model="formData.userName"  placeholder="Please enter username"/>
                 </el-form-item>
 
-                <el-form-item label="Password" prop="password" style=" width: 90%">
-                    <el-input v-model="formData.password" placeholder="Please enter password" clearable/>
+                <el-form-item label="Nick Name" prop="nickName" style=" width: 90%">
+                    <el-input v-model="formData.nickName" placeholder="Please enter nickname" clearable/>
                 </el-form-item>
 
                 <el-form-item label="Email" prop="email" style=" width: 90%">
@@ -30,11 +26,11 @@
 
                 <el-form-item>
                     <el-button @click="close">Cancel</el-button>
-                    <el-button type="primary" :loading="loading" @click="submitForm">Save</el-button>
+                    <el-button type="primary" :loading="loading" @click="submitForm">Update</el-button>
                 </el-form-item>
             </el-form>
-        </div>
-    </el-row>
+        </el-row>
+    </div>
 </template>
 
 <script>
@@ -42,10 +38,12 @@
     import status from "../../../utils"
 
     export default {
-        name: "Add",
+        name: "Edit",
+        props:['data'],
         data() {
-            return{
+            return {
                 formData: {
+                    id: '',
                     userName: '',
                     password: '',
                     nickName: '',
@@ -66,27 +64,27 @@
         },
         created() {
             this.status = status.status
+            this.formData = JSON.parse(JSON.stringify(this.data))
         },
         methods: {
-            submitForm(form) {
+            submitForm() {
                 this.$refs['formData'].validate(valid => {
                     if(valid) {
                         this.loading = true
-                        userApi.addNewUser(this.formData)
+                        userApi.updateUser(this.formData)
                             .then(response => {
-                                this.$message.success(response.message)
                                 this.loading = false
                                 this.$refs['formData'].resetFields()
                                 this.$emit("after")
                                 this.$emit("hideDialog")
                             }).catch(error => {
-                                this.loading = false
-                                console.log(error)
+                                this.loading = true
+                                this.$message.error(error)
                             })
                     }
                 })
             },
-            close(){
+            close() {
                 this.$emit("hideDialog")
             }
         }

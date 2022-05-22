@@ -1,9 +1,11 @@
 import Vue from 'vue'
 
 import  VueRouter from 'vue-router'
+
 import Login from '../views/admin/Login'
 import BIndex from "../views/admin/Index"
 import User from "../views/admin/user/Index"
+// import Info from "../views/admin/user/Info"
 // import Tag from "../views/admin/tag/Index";
 // import Channel from "../views/admin/channel/Index";
 // import FriendLink from "../views/admin/friendlink/Index";
@@ -12,7 +14,7 @@ import User from "../views/admin/user/Index"
 // import Article from "../views/admin/article/Index";
 // import Comment from "../views/admin/comment/Index";
 // import Check from "../views/admin/comment/Checkl";
-// import Info from "../views/admin/user/Info";
+
 // import  Channel_add from '../views/admin/channel/Add'
 // import  Channel_edit from '../views/admin/channel/Edit'
 // import  ArticleAdd from '../views/admin/article/Add'
@@ -89,16 +91,16 @@ const router = new VueRouter({
             name: 'index',
             component: BIndex,
             children:[
-                // {
-                //     path: '/info',
-                //     name :'info',
-                //     component: Info
-                // },
                 {
                     path: '/user',
                     name: 'User',
                     component: User
                 },
+                // {
+                //     path: '/info',
+                //     name :'info',
+                //     component: Info
+                // },
         //         {
         //             path: '/channel',
         //             name :'channel',

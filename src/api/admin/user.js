@@ -15,6 +15,19 @@ export default {
       params: formData
     })
   },
+  updateUser(formData) {
+    return request({
+      url: `/admin/user/updateUser`,
+      method: 'put',
+      params: formData
+    })
+  },
+  deleteUserById(userId) {
+    return request({
+      url: `/admin/user/deleteUserById/${userId}`,
+      method: 'delete'
+    })
+  },
   getUserQueryPaginatedList(current, limit, queryForm) {
     return request({
       url: `/admin/user/getUserQueryPaginatedList/${current}/${limit}`,

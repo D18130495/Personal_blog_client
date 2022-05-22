@@ -61,21 +61,21 @@
         },
         methods:{
             handleCommand(command){
+                if (command == 'index') {
+                    this.$router.push("/")
+                }
+
                 if (command == 'info') {
                     this.$router.push("/info")
                 }
 
-                if (command == 'index') {
-                    this.$router.push("/")
+                if (command == 'password') {
+                    this.$router.push("/password")
                 }
 
                 if (command == 'logout') {
                     this.$store.commit('logout')
                     this.$router.push("/login")
-                }
-
-                if (command == 'password') {
-                    this.$router.push("/password")
                 }
             }
         }
