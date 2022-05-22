@@ -16,12 +16,12 @@
         </div>
 
         <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="id" label="ID" width="180"/>
-            <el-table-column prop="userName" label="User Name" width="180"/>
-            <el-table-column prop="nickName" label="Nick Name"/>
-            <el-table-column prop="email" label="Email"/>
-            <el-table-column prop="createDate" label="Create Time"/>
-            <el-table-column prop="status" label="Status"/>
+            <el-table-column align="center" prop="id" label="ID" width="180"/>
+            <el-table-column align="center" prop="userName" label="User Name" width="180"/>
+            <el-table-column align="center" prop="nickName" label="Nick Name"/>
+            <el-table-column align="center" prop="email" label="Email"/>
+            <el-table-column align="center" prop="createTime" label="Create Time"/>
+            <el-table-column align="center" prop="status" label="Status"/>
             <el-table-column align="center" width="150" label="Operation">
                 <template slot-scope="scope">
                     <el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit"/>
@@ -34,16 +34,16 @@
             background
             layout="total, prev, pager, next, jumper"
             @current-change="handleCurrentChange"
-            :current-page="pageNo"
-            :page-size="7"
+            :current-page="current"
+            :page-size="limit"
             :total="total">
         </el-pagination>
 
-        <!-- <el-dialog :visible.sync="addVisble" v-if="addVisble" :close-on-click-modal="false">
-            <Add @after="addseach" @hideDialog="hidden"></Add>
+        <el-dialog :visible.sync="addVisble" v-if="addVisble" :close-on-click-modal="false" width="35%">
+            <Add @after="addseach" @hideDialog="hidden"/>
         </el-dialog>
 
-        <el-dialog :visible.sync="editVisble" v-if="editVisble" :close-on-click-modal="false">
+        <!-- <el-dialog :visible.sync="editVisble" v-if="editVisble" :close-on-click-modal="false">
             <Edit @after="search" :data="formData" @hideDialog="hidden"></Edit>
         </el-dialog> -->
     </div>
@@ -52,13 +52,13 @@
 <script>
     import userApi from '@/api/admin/user'
     // import {query,del} from "../../../api/user"
-    // import Add from './Add'
+    import Add from '@/views/admin/user/Add'
     // import Edit from './Edit'
 
     export default {
         name: "User",
         components:{
-            // Add,
+            Add,
             // Edit
         },
         data() {
@@ -68,45 +68,38 @@
                     nickName:''
                 },
                 tableData: [],
-                total: 0,
-                pageNo: 1,
-                pages: '',
                 formData: {},
+                total: 0,
+                current: 1,
+                limit: 3,
                 addVisble: false,
                 editVisble: false
             }
         },
-        mounted() {
-            // this.list({"page":this.pageNo})
+        created() {
+            this.getAllUserPaginatedList()
         },
         methods: {
-            // handleCurrentChange(val){
-            //     let  param =this.queryForm
-            //     this.pageNo=val
-            //     param.page=this.pageNo
-            //     this.list(param)
-            // },
-            // search(){
-            //     let  param =this.queryForm
-            //     this.pageNo =1
-            //     param.page=this.pageNo
-            //     this.list(param)
-            // },
-            // list(param){
-            //     query(param).then(data=>{
-            //         this.tableData=data.list
-            //         this.total=data.total
-
-            //     }).catch(error=>{
-            //         this.$message.error(error)
-            //     })
-            // },
-            // add(){
-            //     this.addVisble=true
-            // },
+            getAllUserPaginatedList() {
+                userApi.getUserQueryPaginatedList(this.current, this.limit, this.queryForm)
+                    .then(response => {
+                        this.tableData = response.data.records
+                        console.log(response.data)
+                        this.total = response.data.total
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            search() {
+                this.current = 1
+                this.getAllUserPaginatedList()
+            },
+            add() {
+                this.addVisble = true
+            },
             edit(row) {
-                this.editVisble=true
-                this.formData=row
+                this.editVisble = true
+                this.formData = row
             },
             del(row) {
                 this.$confirm('确定要删除'+row.userName+'用户吗？','提示').then(()=>{
@@ -122,25 +115,19 @@
 
                 })
             },
-            // addseach(){
-            //     let  param =this.queryForm
-            //     param.page=this.pageNo
-            //     this.list(param)
-            //     query(param).then(data=>{
-            //         this.pages=data.pages
-            //         this.handleCurrentChange(this.pages)
-            //     }).catch(error=>{
-            //         this.$message.error(error)
-            //     })
-            // },
-            // hidden(){
-            //     this.addVisble=false
-            //     this.editVisble=false
-            // }
+            addseach(){
+                this.getAllUserPaginatedList()
+            },
+            hidden() {
+                this.addVisble = false
+                this.editVisble = false
+            },
+            handleCurrentChange(val) {
+                this.current = val
+                this.getAllUserPaginatedList()
+            },
         }
     }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped/>
