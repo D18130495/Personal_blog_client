@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style>
-  html,body{
+  html, body{
     margin: 0px;
     padding: 0px;
     height: 100%;

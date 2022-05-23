@@ -6,8 +6,12 @@ import Login from '../views/admin/Login'
 import BIndex from "../views/admin/Index"
 import User from "../views/admin/user/Index"
 import Info from "../views/admin/user/Info"
+
+import Channel from "../views/admin/channel/Index"
+import Channel_add from "../views/admin/channel/Add"
+// import  Channel_edit from '../views/admin/channel/Edit'
+
 // import Tag from "../views/admin/tag/Index";
-// import Channel from "../views/admin/channel/Index";
 // import FriendLink from "../views/admin/friendlink/Index";
 // import FriendLinkAdd from "../views/admin/friendlink/Add";
 // import FriendLinkEdit from "../views/admin/friendlink/Edit";
@@ -15,8 +19,7 @@ import Info from "../views/admin/user/Info"
 // import Comment from "../views/admin/comment/Index";
 // import Check from "../views/admin/comment/Checkl";
 
-// import  Channel_add from '../views/admin/channel/Add'
-// import  Channel_edit from '../views/admin/channel/Edit'
+
 // import  ArticleAdd from '../views/admin/article/Add'
 // import  ArticleEdit from '../views/admin/article/Edit'
 
@@ -31,7 +34,7 @@ import token from '../store/token'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes:[
         {
             path: '/',
@@ -101,16 +104,16 @@ const router = new VueRouter({
                     name: 'info',
                     component: Info
                 },
-        //         {
-        //             path: '/channel',
-        //             name :'channel',
-        //             component: Channel
-        //         },
-        //         {
-        //             path: '/channel_add',
-        //             name :'channel_add',
-        //             component: Channel_add
-        //         },
+                {
+                    path: '/channel',
+                    name :'channel',
+                    component: Channel
+                },
+                {
+                    path: '/channel_add',
+                    name :'channel_add',
+                    component: Channel_add
+                },
         //         {
         //             path: '/channel_edit',
         //             name :'channel_edit',

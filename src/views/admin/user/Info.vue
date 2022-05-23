@@ -99,6 +99,7 @@
                                 this.$message.success(response.message)
                                 token.setUser(response.data)
                                 this.defForm = response.data
+                                location.reload()
                             }).catch(error => {
                                 this.loading = false
                                 console.log(error)

@@ -11,7 +11,7 @@
             </el-col>
 
             <el-col :span="4" align="right">
-                <el-dropdown trigger="click" @command="handleCommand">
+                <el-dropdown trigger="click" @command="handleCommand" >
                     <el-link class="user" :underline="false">
                         <table>
                             <tr>
@@ -20,7 +20,7 @@
                                     <el-icon class="el-icon-caret-bottom"></el-icon>
                                 </td>
                                 <td></td>
-                                <td valign="middle">
+                                <td valign="middle" style="height: 57px">
                                     <img :src="avatar" alt="">
                                 </td>
                             </tr>
@@ -100,8 +100,8 @@
     }
 
     .user img{
-        width: 57px;
-        height: 57px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
     }
 </style>
