@@ -2,14 +2,14 @@ import Vue from 'vue'
 
 import  VueRouter from 'vue-router'
 
-import Login from '../views/admin/Login'
+import Login from "../views/admin/Login"
 import BIndex from "../views/admin/Index"
 import User from "../views/admin/user/Index"
 import Info from "../views/admin/user/Info"
 
 import Channel from "../views/admin/channel/Index"
 import Channel_add from "../views/admin/channel/Add"
-// import  Channel_edit from '../views/admin/channel/Edit'
+import Channel_edit from "../views/admin/channel/Edit"
 
 // import Tag from "../views/admin/tag/Index";
 // import FriendLink from "../views/admin/friendlink/Index";
@@ -114,11 +114,11 @@ const router = new VueRouter({
                     name :'channel_add',
                     component: Channel_add
                 },
-        //         {
-        //             path: '/channel_edit',
-        //             name :'channel_edit',
-        //             component: Channel_edit
-        //         },
+                {
+                    path: '/channel_edit',
+                    name :'channel_edit',
+                    component: Channel_edit
+                },
         //         {
         //             path: '/tag',
         //             name :'tag',

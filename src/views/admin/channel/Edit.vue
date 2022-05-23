@@ -1,11 +1,11 @@
 <template>
-    <div v-title data-title="HuaruoYM | New Channel">
+    <div v-title data-title="HuaruoYM | Edit Channel">
         <el-row :gutter="15">
             <el-form ref="formData" :model="formData" :rules="rules" size="medium" label-width="150px">
                 <el-form-item label="Channel Name" prop="name">
-                    <el-input v-model="formData.name" placeholder="Please enter channel name" clearable style="width: 40%"/>
+                   <el-input v-model="formData.name" placeholder="Please enter channel name" clearable style="width: 40%"/>
                 </el-form-item>
-
+            
                 <el-form-item label="Parent Channel" prop="parentId">
                     <treeselect v-model="formData.parentId" placeholder="Please choose parent channel" :multiple="false" :options="treeDate" clearable style="width: 40%"/>
                 </el-form-item>
@@ -13,7 +13,7 @@
                 <el-form-item label="Summary" prop="summary">
                     <el-input v-model="formData.summary" placeholder="Please enter channel summary" clearable style="width: 40%"/>
                 </el-form-item>
-
+            
                 <el-form-item label="Position" prop="pos">
                     <el-select v-model="formData.pos" placeholder="Please choose position" clearable style="width: 40%">
                         <el-option 
@@ -52,7 +52,7 @@
                         inactive-color="#999999"
                     />
                 </el-form-item>
-
+            
                 <el-form-item label="Channel Image" prop="channelImg">
                     <el-upload
                             class="avatar-uploader"
@@ -68,10 +68,10 @@
                 <el-form-item label="Content" prop="content">
                     <v-md-editor v-model="formData.content" height="400px"></v-md-editor>
                 </el-form-item>
-
+            
                 <el-form-item>
                     <el-button @click="$router.back()">Cancel</el-button>
-                    <el-button type="primary" :loading="loading" @click="submitForm">Save</el-button>
+                    <el-button type="primary" :loading="loading" @click="submitForm">Update</el-button>
                 </el-form-item>
             </el-form>
         </el-row>
@@ -88,13 +88,14 @@
     import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
     export default {
-        name: "Add",
+        name: "Edit",
         components: { 
             Treeselect
         },
         data() {
             return {
                 formData: {
+                    id: '',
                     name: '',
                     parentId: null,
                     channelImg: '',
@@ -113,12 +114,15 @@
                 rules: {
                     name: [{required: true, message: 'Plesae enter channel name', trigger: 'blur'}]
                 },
-                pos: {}
+                pos: {},
+                channelId: ''
             }
         },
         created() {
             this.getParentTreeDate()
             this.pos = pos.pos
+            this.channelId = this.$route.query.id
+            this.getChannelByChannelId()
         },
         methods: {
             getParentTreeDate() {
@@ -129,10 +133,26 @@
                         console.log(error)
                     })
             },
-            submitForm(form) {
-                this.$refs['formData'].validate(valid => {
-                    if(valid) {
+            getChannelByChannelId() {
+                channelApi.getChannelByChannelId(this.channelId)
+                    .then(response => {
+                        this.formData = response.data
+
+                        if(response.data.single == 'Y') {
+                            this.formData.single = true
+                        }else {
+                            this.formData.single = false
+                        }
+
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            submitForm(form){
+                this.$refs['formData'].validate(valid=>{
+                    if (valid) {
                         this.loading = true
+                        this.formData.id = this.channelId
 
                         if(this.formData.single) {
                             this.formData.single = 'Y'
@@ -140,7 +160,9 @@
                             this.formData.single = 'N'
                         }
 
-                        channelApi.addNewChannel(this.formData)
+                        console.log(this.formData)
+
+                        channelApi.updateChannelByChannelId(this.formData)
                             .then(response => {
                                 this.loading = false
                                 this.$message.success(response.message)
@@ -189,7 +211,7 @@
         border: 1px dashed #d9d9d9;
         border-radius: 6px;
         cursor: pointer;
-        width: 80px;
+        width:80px;
         height: 80px;
         position: relative;
         overflow: hidden;

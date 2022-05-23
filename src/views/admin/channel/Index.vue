@@ -71,16 +71,16 @@
             },
             add() {
                 this.$router.push('/channel_add')
+                this.addseach()
             },
             edit(row) {
-                this.queryForm=row
+                this.queryForm = row
 
                 this.$router.push({
                     path:'/channel_edit',
                     query:{
                         id: row.id
                     }
-
                 })
             },
             del(row) {
@@ -97,9 +97,6 @@
                     }).catch(error => {
                         console.log(error)
                     })
-            },
-            addseach() {
-                this.getAllChannelPaginatedList()
             },
             handleCurrentChange(val) {
                 this.current = val

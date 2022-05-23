@@ -1,11 +1,10 @@
 import request from '@/utils/request'
 
 export default {
-  login(userInfo) {
+  getChannelByChannelId(channelId) {
     return request({
-      url: `/admin/user/login`,
-      method: 'get',
-      params: userInfo
+      url: `/admin/channel/getChannelByChannelId/${channelId}`,
+      method: 'get'
     })
   },
   addNewChannel(formData) {
@@ -15,9 +14,9 @@ export default {
       params: formData
     })
   },
-  updateUser(formData) {
+  updateChannelByChannelId(formData) {
     return request({
-      url: `/admin/user/updateUser`,
+      url: `/admin/channel/updateChannelByChannelId`,
       method: 'put',
       params: formData
     })
