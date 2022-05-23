@@ -11,7 +11,8 @@ import Channel from "../views/admin/channel/Index"
 import Channel_add from "../views/admin/channel/Add"
 import Channel_edit from "../views/admin/channel/Edit"
 
-// import Tag from "../views/admin/tag/Index";
+import Tag from "../views/admin/tag/Index"
+
 // import FriendLink from "../views/admin/friendlink/Index";
 // import FriendLinkAdd from "../views/admin/friendlink/Add";
 // import FriendLinkEdit from "../views/admin/friendlink/Edit";
@@ -106,24 +107,24 @@ const router = new VueRouter({
                 },
                 {
                     path: '/channel',
-                    name :'channel',
+                    name: 'channel',
                     component: Channel
                 },
                 {
                     path: '/channel_add',
-                    name :'channel_add',
+                    name: 'channel_add',
                     component: Channel_add
                 },
                 {
                     path: '/channel_edit',
-                    name :'channel_edit',
+                    name: 'channel_edit',
                     component: Channel_edit
                 },
-        //         {
-        //             path: '/tag',
-        //             name :'tag',
-        //             component: Tag
-        //         },
+                {
+                    path: '/tag',
+                    name: 'tag',
+                    component: Tag
+                },
         //         {
         //             path: '/friend',
         //             name :'friend',
