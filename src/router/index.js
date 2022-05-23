@@ -5,7 +5,7 @@ import  VueRouter from 'vue-router'
 import Login from '../views/admin/Login'
 import BIndex from "../views/admin/Index"
 import User from "../views/admin/user/Index"
-// import Info from "../views/admin/user/Info"
+import Info from "../views/admin/user/Info"
 // import Tag from "../views/admin/tag/Index";
 // import Channel from "../views/admin/channel/Index";
 // import FriendLink from "../views/admin/friendlink/Index";
@@ -96,11 +96,11 @@ const router = new VueRouter({
                     name: 'User',
                     component: User
                 },
-                // {
-                //     path: '/info',
-                //     name :'info',
-                //     component: Info
-                // },
+                {
+                    path: '/info',
+                    name: 'info',
+                    component: Info
+                },
         //         {
         //             path: '/channel',
         //             name :'channel',

@@ -74,6 +74,7 @@
                         userApi.updateUser(this.formData)
                             .then(response => {
                                 this.loading = false
+                                this.$message.success(response.message)
                                 this.$refs['formData'].resetFields()
                                 this.$emit("after")
                                 this.$emit("hideDialog")

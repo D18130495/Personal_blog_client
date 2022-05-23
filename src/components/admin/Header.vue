@@ -11,22 +11,22 @@
             </el-col>
 
             <el-col :span="4" align="right">
-                <el-dropdown trigger="click" @command="handleCommand" style="margin-top: 20px">
-                      <el-link class="user" :underline="false">
-                          <table>
-                              <tr>
-                                  <td valign="top">{{ nickName }}</td>
-                                  <td valign="top">
-                                      <el-icon class="el-icon-caret-bottom"></el-icon>
-                                  </td>
-                                  <td></td>
-                                  <td valign="middle">
-                                      <!-- <img :src="avatar" alt=""> -->
-                                    </td>
-                              </tr>
-                          </table>
+                <el-dropdown trigger="click" @command="handleCommand">
+                    <el-link class="user" :underline="false">
+                        <table>
+                            <tr>
+                                <td valign="middle">{{ nickName }}</td>
+                                <td valign="middle" style="padding-right: 10px">
+                                    <el-icon class="el-icon-caret-bottom"></el-icon>
+                                </td>
+                                <td></td>
+                                <td valign="middle">
+                                    <img :src="avatar" alt="">
+                                </td>
+                            </tr>
+                        </table>
+                    </el-link>
 
-                      </el-link>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="index">Home</el-dropdown-item>
                         <el-dropdown-item command="info">Information</el-dropdown-item>
@@ -56,7 +56,7 @@
             }
           
             if (token.getUser().avatar == null) {
-                this.avatar = 'http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2020/12/30/c1d5fb12c96c48f0b10d1b5764b73ecd.jpg'
+                this.avatar = 'http://localhost:9000/images/6eb28bd4-c2a2-4b6d-82b1-16faff0ebc74.png'
             }
         },
         methods:{
@@ -100,8 +100,8 @@
     }
 
     .user img{
-        width: 30px;
-        height: 30px;
-        border-radius: 15px;
+        width: 57px;
+        height: 57px;
+        border-radius: 50%;
     }
 </style>
