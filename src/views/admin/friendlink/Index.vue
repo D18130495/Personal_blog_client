@@ -1,9 +1,9 @@
 <template>
-    <div v-title data-title="HuaruoYM | Tag">
+    <div v-title data-title="HuaruoYM | Friend Link">
         <div>
             <el-form :inline="true" ref="queryForm" :model="queryForm" label-width="80px">
                 <el-form-item>
-                    <el-input v-model="queryForm.tagName" placeholder="Search by tag"/>
+                    <el-input v-model="queryForm.title" placeholder="Search by title"/>
                 </el-form-item>
                 <el-form-item>
                     <el-button icon="el-icon-search" @click="search" type="primary">Search</el-button>
@@ -13,9 +13,13 @@
         </div>
 
         <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="id" label="Id" align="center"/>
-            <el-table-column prop="tagName" label="Tag name" align="center"/>
-            <el-table-column align="center" label="Operation">
+            <el-table-column prop="id" label="ID" align="center"/>
+            <el-table-column prop="title" label="Title" align="center"/>
+            <el-table-column prop="url" label="URL" align="center"/>
+            <el-table-column prop="target" label="Open Method" align="center"/>
+
+
+            <el-table-column label="Opeartion" align="center">
                 <template slot-scope="scope">
                     <el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit"/>
                     <el-button @click="del(scope.row)"  size="small" type="danger" icon="el-icon-delete"/>
@@ -31,49 +35,33 @@
                 :page-size="limit"
                 :total="total">
         </el-pagination>
-
-        <el-dialog :visible.sync="addVisble" v-if="addVisble" :close-on-click-modal="false">
-            <Add @after="addSeach" @hideDialog="hidden"/>
-        </el-dialog>
-
-        <el-dialog :visible.sync="editVisble" v-if="editVisble" :close-on-click-modal="false">
-            <Edit @after="editSearch" :data="formData" @hideDialog="hidden"/>
-        </el-dialog>
     </div>
 </template>
 
 <script>
-    import tagApi from '@/api/admin/tag'
-
-    import Add from './Add'
-    import Edit from './Edit'
+    import friendlinkApi from '@/api/admin/friendlink'
 
     export default {
         name: "Index",
-        components: {
-            Add,
-            Edit
-        },
         data() {
             return {
-                queryForm:{
-                    tagName:'',
+                queryForm: {
+                    name: '',
+                    userName: ''
                 },
                 tableData: [],
                 formData: {},
                 current: 1,
                 limit: 5,
-                total: 0,
-                addVisble: false,
-                editVisble: false
+                total: 0
             }
         },
         created() {
-            this.getAllTagPaginatedList()
+            this.getAllFriendLinkPaginatedList()
         },
         methods: {
-            getAllTagPaginatedList() {
-                tagApi.getTagQueryPaginatedList(this.current, this.limit, this.queryForm)
+            getAllFriendLinkPaginatedList() {
+                friendlinkApi.getFriendLinkQueryPaginatedList(this.current, this.limit, this.queryForm)
                     .then(response => {
                         this.tableData = response.data.records
                         this.total = response.data.total
@@ -83,20 +71,25 @@
                     })
             },
             add() {
-                this.addVisble = true
+                this.$router.push('/friend_add')
             },
             edit(row) {
-                this.editVisble = true
-                this.formData = row
+                this.queryForm = row
+                this.$router.push({
+                    path:'/friend_edit',
+                    query:{
+                        id: row.id
+                    }
+                })
             },
             del(row) {
-                this.$confirm('Are you sure to delete this tag "' + row.tagName + '" ?', 'Inform')
+                this.$confirm('Are you sure to delete this link "' + row.title + '" ?', 'Inform')
                     .then(() => {
-                        tagApi.deleteTagById(row.id)
+                        friendlinkApi.deleteFriendLinkById(row.id)
                             .then(response => {
                                 this.$message.success(response.message)
                                 this.current = 1
-                                this.getAllTagPaginatedList()
+                                this.getAllFriendLinkPaginatedList()
                             }).catch(error => {
                                 console.log(error)
                             })
@@ -105,18 +98,14 @@
                     })
             },
             addSeach() {
-                this.getAllTagPaginatedList()
+                this.getAllFriendLinkPaginatedList()
             },
             editSearch() {
-                this.getAllTagPaginatedList()
-            },
-            hidden() {
-                this.addVisble = false
-                this.editVisble = false
+                this.getAllFriendLinkPaginatedList()
             },
             handleCurrentChange(val) {
                 this.current = val
-                this.getAllTagPaginatedList()
+                this.getAllFriendLinkPaginatedList()
             }
         }
     }

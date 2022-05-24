@@ -37,7 +37,7 @@ const data = [
                 router: '/user'
             },
             {
-                name: 'Friend',
+                name: 'Friend Link',
                 icon: 'el-icon-paperclip',
                 router: '/friend'
             }

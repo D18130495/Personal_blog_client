@@ -2,19 +2,19 @@
     <el-row :gutter="15">
         <div v-title data-title="HuaruoYM | New User">
             <el-form ref="formData" :model="formData" :rules="rules" label-width="130px">
-                <el-form-item label="User Name" prop="userName" style=" width: 90%">
+                <el-form-item label="User Name" prop="userName" style="width: 90%">
                     <el-input v-model="formData.userName" placeholder="Please enter username" clearable/>
                 </el-form-item>
                 
-                <el-form-item label="Nick Name" prop="nickName" style=" width: 90%">
+                <el-form-item label="Nick Name" prop="nickName" style="width: 90%">
                     <el-input v-model="formData.nickName" placeholder="Please enter nickname" clearable/>
                 </el-form-item>
 
-                <el-form-item label="Password" prop="password" style=" width: 90%">
+                <el-form-item label="Password" prop="password" style="width: 90%">
                     <el-input v-model="formData.password" placeholder="Please enter password" clearable/>
                 </el-form-item>
 
-                <el-form-item label="Email" prop="email" style=" width: 90%">
+                <el-form-item label="Email" prop="email" style="width: 90%">
                     <el-input v-model="formData.email" placeholder="Please enter Email" clearable/>
                 </el-form-item>
 

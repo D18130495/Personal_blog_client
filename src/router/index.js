@@ -13,9 +13,10 @@ import Channel_edit from "../views/admin/channel/Edit"
 
 import Tag from "../views/admin/tag/Index"
 
-// import FriendLink from "../views/admin/friendlink/Index";
-// import FriendLinkAdd from "../views/admin/friendlink/Add";
-// import FriendLinkEdit from "../views/admin/friendlink/Edit";
+import FriendLink from "../views/admin/friendlink/Index"
+import FriendLinkAdd from "../views/admin/friendlink/Add"
+import FriendLinkEdit from "../views/admin/friendlink/Edit"
+
 // import Article from "../views/admin/article/Index";
 // import Comment from "../views/admin/comment/Index";
 // import Check from "../views/admin/comment/Checkl";
@@ -125,21 +126,21 @@ const router = new VueRouter({
                     name: 'tag',
                     component: Tag
                 },
-        //         {
-        //             path: '/friend',
-        //             name :'friend',
-        //             component: FriendLink
-        //         },
-        //         {
-        //             path: '/friend_add',
-        //             name :'friend_add',
-        //             component: FriendLinkAdd
-        //         },
-        //         {
-        //             path: '/friend_edit',
-        //             name :'friend_edit',
-        //             component: FriendLinkEdit
-        //         },
+                {
+                    path: '/friend',
+                    name:'friend',
+                    component: FriendLink
+                },
+                {
+                    path: '/friend_add',
+                    name: 'friend_add',
+                    component: FriendLinkAdd
+                },
+                {
+                    path: '/friend_edit',
+                    name: 'friend_edit',
+                    component: FriendLinkEdit
+                },
         //         {
         //             path: '/article',
         //             name :'article',
