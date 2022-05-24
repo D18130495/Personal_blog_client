@@ -1,29 +1,23 @@
 import request from '@/utils/request'
 
 export default {
-  getChannelByChannelId(channelId) {
+  addNewTag(formData) {
     return request({
-      url: `/admin/channel/getChannelByChannelId/${channelId}`,
-      method: 'get'
-    })
-  },
-  addNewChannel(formData) {
-    return request({
-      url: `/admin/channel/addNewChannel`,
+      url: `/admin/tag/addNewTag`,
       method: 'post',
       params: formData
     })
   },
-  updateChannelByChannelId(formData) {
+  updateTagByTagId(formData) {
     return request({
-      url: `/admin/channel/updateChannelByChannelId`,
+      url: `/admin/tag/updateTagByTagId`,
       method: 'put',
       params: formData
     })
   },
-  deleteChannelById(channelId) {
+  deleteTagById(tagId) {
     return request({
-      url: `/admin/channel/deleteChannelById/${channelId}`,
+      url: `/admin/tag/deleteTagById/${tagId}`,
       method: 'delete'
     })
   },
@@ -32,19 +26,6 @@ export default {
       url: `/admin/tag/getTagQueryPaginatedList/${current}/${limit}`,
       method: 'get',
       params: queryForm
-    })
-  },
-  getParentTreeDate() {
-    return request({
-      url: `/admin/channel/getParentTreeDate`,
-      method: 'get'
-    })
-  },
-  uploadChannelImage(formData) {
-    return request({
-      url: `/admin/channel/uploadChannelImage`,
-      method: 'post',
-      data: formData
     })
   }
 }

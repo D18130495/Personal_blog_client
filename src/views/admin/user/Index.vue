@@ -104,7 +104,7 @@
                 this.formData = row
             },
             del(row) {
-                this.$confirm('Are you sure to delete ' + row.userName + '?', 'Inform')
+                this.$confirm('Are you sure to delete this user "' + row.userName + '" ?', 'Inform')
                     .then(() => {
                         userApi.deleteUserById(row.id)
                             .then(response => {

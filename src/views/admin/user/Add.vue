@@ -3,7 +3,7 @@
         <div v-title data-title="HuaruoYM | New User">
             <el-form ref="formData" :model="formData" :rules="rules" label-width="130px">
                 <el-form-item label="User Name" prop="userName" style=" width: 90%">
-                    <el-input v-model="formData.userName"  placeholder="Please enter username" clearable/>
+                    <el-input v-model="formData.userName" placeholder="Please enter username" clearable/>
                 </el-form-item>
                 
                 <el-form-item label="Nick Name" prop="nickName" style=" width: 90%">

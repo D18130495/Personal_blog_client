@@ -84,7 +84,7 @@
                 })
             },
             del(row) {
-                this.$confirm('Are you sure to delete ' + row.name + '?', 'Inform')
+                this.$confirm('Are you sure to delete this channel "' + row.name + '" ?', 'Inform')
                     .then(() => {
                         channelApi.deleteChannelById(row.id)
                             .then(response => {

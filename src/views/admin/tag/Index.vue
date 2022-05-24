@@ -33,27 +33,26 @@
         </el-pagination>
 
         <el-dialog :visible.sync="addVisble" v-if="addVisble" :close-on-click-modal="false">
-            <Add @after="addseach" @hideDialog="hidden"/>
+            <Add @after="addSeach" @hideDialog="hidden"/>
         </el-dialog>
 
         <el-dialog :visible.sync="editVisble" v-if="editVisble" :close-on-click-modal="false">
-            <Edit @after="search" :data="formData" @hideDialog="hidden"/>
+            <Edit @after="editSearch" :data="formData" @hideDialog="hidden"/>
         </el-dialog>
     </div>
 </template>
 
 <script>
-    // import {query,del} from "../../../api/tag";
     import tagApi from '@/api/admin/tag'
 
-    // import Add from './Add'
-    // import Edit from './Edit'
+    import Add from './Add'
+    import Edit from './Edit'
 
     export default {
         name: "Index",
         components: {
-            // Add,
-            // Edit
+            Add,
+            Edit
         },
         data() {
             return {
@@ -73,12 +72,6 @@
             this.getAllTagPaginatedList()
         },
         methods: {
-            search() {
-                let  param =this.queryForm
-                this.pageNo =1
-                param.page=this.pageNo
-                this.list(param)
-            },
             getAllTagPaginatedList() {
                 tagApi.getTagQueryPaginatedList(this.current, this.limit, this.queryForm)
                     .then(response => {
@@ -89,37 +82,33 @@
                         console.log(error)
                     })
             },
-            del(row) {
-                this.$confirm('确定要删除'+row.tagName+'标签吗？','提示').then(()=>{
-                    del (row.id).then(data=>{
-                        let param= this.queryForm
-                        param.page =this.pageNo
-                        this.list(param)
-                    }).catch(error=>{
-
-                        this.$message.error(error)
-                    })
-                }).catch(error=>{
-
-                })
-            },
             add() {
-                this.addVisble=true
+                this.addVisble = true
             },
             edit(row) {
-                this.editVisble=true
-                this.formData=row
+                this.editVisble = true
+                this.formData = row
             },
-            addseach() {
-                let  param =this.queryForm
-                param.page=this.pageNo
-                this.list(param)
-                query(param).then(data=>{
-                    this.pages=data.pages
-                    this.handleCurrentChange(this.pages)
-                }).catch(error=>{
-                    this.$message.error(error)
-                })
+            del(row) {
+                this.$confirm('Are you sure to delete this tag "' + row.tagName + '" ?','提示')
+                    .then(() => {
+                        tagApi.deleteTagById(row.id)
+                            .then(response => {
+                                this.$message.success(response.message)
+                                this.current = 1
+                                this.getAllTagPaginatedList()
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            addSeach() {
+                this.getAllTagPaginatedList()
+            },
+            editSearch() {
+                this.getAllTagPaginatedList()
             },
             hidden() {
                 this.addVisble = false
