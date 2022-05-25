@@ -181,9 +181,9 @@
                         this.loading = true
 
                         if(this.formData.commentStatus) {
-                            this.formData.commentStatus = 0
-                        }else {
                             this.formData.commentStatus = 1
+                        }else {
+                            this.formData.commentStatus = 0
                         }
                         
                         if(this.formData.rotation) {

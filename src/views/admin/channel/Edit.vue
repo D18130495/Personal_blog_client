@@ -126,7 +126,7 @@
         },
         methods: {
             getParentTreeDate() {
-                channelApi.getParentTreeDate()
+                channelApi.getParentTreeData()
                     .then(response => {
                         this.treeDate = response.data
                     }).catch(error => {

@@ -73,18 +73,19 @@
                 </el-col>
 
                 <el-col :span="12">
-                    <el-form-item label="附件" prop="attachmentList">
+                    <el-form-item label="Attachment" prop="attachmentList">
                         <el-upload
                                 class="upload-demo"
                                 action="string"
                                 :before-remove="beforeRemove"
                                 multiple
                                 :limit="3"
-                                :http-request="uploadImg2"
+                                :http-request="uploadAttachment"
                                 :on-exceed="handleExceed"
-                                :file-list="formData.articleAttachments">
-                            <el-button size="small" type="primary">点击上传</el-button>
-                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                                :file-list="formData.articleAttachments"
+                                :before-upload="handleUploadFile">
+                            <el-button size="small" type="primary">Click to upload</el-button>
+                            <div slot="tip" class="el-upload__tip">File size should not exceed 500kb</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -102,7 +103,7 @@
                 <el-col :span="24">
                     <el-form-item>
                         <el-button @click="$router.back()">Cancel</el-button>
-                        <el-button type="primary" :loading="loading" @click="submitForm">Save</el-button>
+                        <el-button type="primary" :loading="loading" @click="submitForm">Update</el-button>
                     </el-form-item>
                 </el-col>
             </el-form>
@@ -112,7 +113,7 @@
 
 <script>
     import token from '@/store/token'
-    // import {update, upload, detail} from "@/api/article";
+    
     import articleApi from '@/api/admin/article'
     import channelApi from '@/api/admin/channel'
     import tagApi from '@/api/admin/tag'
@@ -135,7 +136,7 @@
                     author: token.getUser().userName,
                     url: '',
                     content: '',
-                    commentStatus: true,
+                    commentStatus: false,
                     rotation: false,
                     top: false,
                     articleAttachments: [],
@@ -172,18 +173,18 @@
                             this.formData.selectTagList = []
                         }
 
-                        if(!response.data.content){
+                        if(!response.data.content) {
                             this.formData.content = ''
                         }
 
-                        if(this.formData.commentStatus != 1){
+                        if(this.formData.commentStatus == 1) {
                             this.formData.commentStatus= true
                         }
 
                         if(this.formData.rotation == 1){
                             this.formData.rotation= true
                         }
-                        
+
                         if(this.formData.top == 1){
                             this.formData.top= true
                         }
@@ -210,83 +211,120 @@
                         console.log(error)
                     })
             },
-            submitForm(form) {
+            submitForm() {
                 this.$refs['formData'].validate(valid => {
                     if(valid) {
-                        this.loading=true
-                        console.log(this.formData)
-                        if (this.formData.commentStatus){
-                            this.formData.commentStatus =0
+                        this.loading = true
+
+                        if(this.formData.commentStatus) {
+                            this.formData.commentStatus = 1
                         }else {
-                            this.formData.commentStatus= 1
+                            this.formData.commentStatus = 0
                         }
 
-                        if (this.formData.rotation) {
-                            this.formData.rotation=1
+                        if(this.formData.rotation) {
+                            this.formData.rotation = 1
                         }else {
-                            this.formData.rotation=0
+                            this.formData.rotation = 0
                         }
 
-                        if (this.formData.top){
-                            this.formData.top=1
+                        if(this.formData.top) {
+                            this.formData.top = 1
                         } else {
-                            this.formData.top=0
+                            this.formData.top = 0
                         }
-                        update(this.formData).then(data=>{
-                            this.loading=false
-                            this.$message.success(data.message)
-                            this.$refs['formData'].resetFields()
-                            this.$router.push('/article')
-                        }).catch(error=>{
-                            this.loading=true
-                            this.$message.error('操作失败')
-                        })
+
+                        articleApi.updateArticleByArticleId(this.formData)
+                            .then(response => {
+                                this.loading = false
+                                this.$message.success(response.message)
+                                this.$refs['formData'].resetFields()
+                                this.$router.push('/article')
+                            }).catch(error => {
+                                this.loading = false
+                                console.log(error)
+                            })
                     }
                 })
             },
-            close(){
-                this.$emit("hideDialog")
+            uploadImg(param) {
+                const formData = new FormData()
+
+                formData.append("file", param.file)
+                
+                articleApi.uploadArticleImageAndFile(formData)
+                    .then(response => {
+                        this.formData.titleImg = response.data
+                    }).catch(error => {
+                        console.log(error)
+                    })
             },
-            uploadImg(param){
-                const  formData = new FormData();
-                formData.append("file",param.file)
-                upload(formData).then(data=>{
-                    this.formData.titleImg = data.data
-                }).catch(error=>{
-                    this.$message.error(error)
-                })
-            },
-            uploadImg2(param){
-                const  formData = new FormData();
-                formData.append("file",param.file)
-                upload(formData).then(data=>{
-                    this.formData.articleAttachments.push({name:param.file.name,url:data.data})
-                }).catch(error=>{
-                    this.$message.error(error)
-                })
-            },
-            //上传之前的验证
-            beforeAvatarUpload(file){
-                const isIMAGE = (file.type === 'image/jpeg') ||  (file.type === 'image/jpg') || (file.type ==='image/png')
+            beforeImageUpload(file) {
+                const isIMAGE = (file.type === 'image/jpeg') || (file.type === 'image/jpg') || (file.type ==='image/png')
                 const isLt2M = file.size / 1024 / 1024 < 2
-                if (!isIMAGE) {
-                    this.$message.error('上传文件只能是图片格式!')
+
+                if(!isIMAGE) {
+                    this.$message.error('Upload file should be image format')
                 }
-                if (!isLt2M) {
-                    this.$message.error('上传文件大小不能超过 2MB!')
+
+                if(!isLt2M) {
+                    this.$message.error('Upload file size cannot exceed 2MB')
                 }
+
                 return isIMAGE && isLt2M
             },
-            handleExceed(files,articleAttachments){
-                this.$message.warning(`当前限制选择3个文件，本次选择了${files.length+articleAttachments.length} 个文件`)
-            },
-            beforeRemove(file,articleAttachments){
+            handleUploadImage(event, insertImage, files) {
+                const  formData = new FormData();
 
-                articleAttachments.forEach((item,index)=>{
-                    if (file.name == item.name){
-                        this.formData.articleAttachments.splice(index,1)
+                formData.append("file",files[0])
+                
+                articleApi.uploadArticleImageAndFile(formData)
+                    .then(response => {
+                        this.image = response.data
+
+                        insertImage({
+                            url: this.image,
+                            desc: "this.image",
+                            width: '50%',
+                            height: '50%'
+                        })
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            beforeRemove(file, articleAttachments) {
+                articleAttachments.forEach((item, index) => {
+                    if(file.name == item.name){
+                        this.formData.articleAttachments.splice(index, 1)
                     }
                 })
+            },
+            uploadAttachment(param) {
+                const formData = new FormData()
+
+                formData.append("file",param.file)
+
+                articleApi.uploadArticleImageAndFile(formData)
+                    .then(response => {
+                        this.formData.articleAttachments.push({
+                            name: param.file.name,
+                            url: response.data
+                        })
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            handleExceed(files, articleAttachments) {
+                this.$message.warning(`Limited to select 3 files, current have ${files.length+articleAttachments.length} files`)
+            },
+            handleUploadFile(file) {
+                const isLt2M = file.size / 1024 / 1024 < 2
+
+                if(!isLt2M) {
+                    this.$message.error('Upload file size cannot exceed 2MB')
+                }
+
+                return isLt2M
             }
         }
     }

@@ -14,16 +14,16 @@ export default {
       data: formData
     })
   },
-  updateTagByTagId(formData) {
+  updateArticleByArticleId(formData) {
     return request({
-      url: `/admin/tag/updateTagByTagId`,
+      url: `/admin/article/updateArticleByArticleId`,
       method: 'put',
-      params: formData
+      data: formData
     })
   },
-  deleteTagById(tagId) {
+  deleteArticleById(articleId) {
     return request({
-      url: `/admin/tag/deleteTagById/${tagId}`,
+      url: `/admin/article/deleteArticleById/${articleId}`,
       method: 'delete'
     })
   },

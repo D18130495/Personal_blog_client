@@ -38,7 +38,6 @@
 </template>
 
 <script>
-    // import {query,del} from "@/api/article";
     import articleApi from '@/api/admin/article'
 
     export default {
@@ -81,19 +80,20 @@
                     }
                 })
             },
-            del(row){
-                this.$confirm('确定要删除'+row.title+'文章吗？','提示').then(()=>{
-                    del (row.id).then(data=>{
-                        let param= this.queryForm
-                        param.page =this.pageNo
-                        this.list(param)
-                    }).catch(error=>{
-
-                        this.$message.error(error)
-                    })
-                }).catch(error=>{
-
-                })
+            del(row) {
+                this.$confirm('Are you sure to delete this article "' + row.title + '" ?', 'Inform')
+                    .then(() => {
+                        articleApi.deleteArticleById(row.id)
+                            .then(response => {
+                                this.$message.success(response.message)
+                                this.current = 1
+                                this.getAllArticlePaginatedList()
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                        }).catch(error => {
+                            console.log(error)
+                        })
             },
             handleCurrentChange(val) {
                 this.current = val
