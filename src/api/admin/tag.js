@@ -27,5 +27,11 @@ export default {
       method: 'get',
       params: queryForm
     })
-  }
+  },
+  getTagList() {
+    return request({
+      url: `/admin/tag/getTagList`,
+      method: 'get'
+    })
+  },
 }

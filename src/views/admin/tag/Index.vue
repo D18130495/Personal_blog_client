@@ -62,7 +62,7 @@
                 tableData: [],
                 formData: {},
                 current: 1,
-                limit: 5,
+                limit: 7,
                 total: 0,
                 addVisble: false,
                 editVisble: false
@@ -77,7 +77,6 @@
                     .then(response => {
                         this.tableData = response.data.records
                         this.total = response.data.total
-                        console.log(response.data)
                     }).catch(error => {
                         console.log(error)
                     })

@@ -34,9 +34,9 @@ export default {
       params: queryForm
     })
   },
-  getParentTreeDate() {
+  getParentTreeData() {
     return request({
-      url: `/admin/channel/getParentTreeDate`,
+      url: `/admin/channel/getParentTreeData`,
       method: 'get'
     })
   },

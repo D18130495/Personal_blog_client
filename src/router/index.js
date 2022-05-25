@@ -17,19 +17,18 @@ import FriendLink from "../views/admin/friendlink/Index"
 import FriendLinkAdd from "../views/admin/friendlink/Add"
 import FriendLinkEdit from "../views/admin/friendlink/Edit"
 
-// import Article from "../views/admin/article/Index";
+import Article from "../views/admin/article/Index"
+import ArticleAdd from '../views/admin/article/Add'
+import ArticleEdit from '../views/admin/article/Edit'
+
 // import Comment from "../views/admin/comment/Index";
 // import Check from "../views/admin/comment/Checkl";
 
-
-// import  ArticleAdd from '../views/admin/article/Add'
-// import  ArticleEdit from '../views/admin/article/Edit'
-
-import FIndex from  '../views/front/Index'
-import List from  '../views/front/List'
-import Detail from  '../views/front/Detail'
-import ChannelDetail from  '../views/front/ChannelDetail'
-import TagList from  '../views/front/TagList'
+import FIndex from '../views/front/Index'
+import List from '../views/front/List'
+import Detail from '../views/front/Detail'
+import ChannelDetail from '../views/front/ChannelDetail'
+import TagList from '../views/front/TagList'
 
 import token from '../store/token'
 
@@ -141,21 +140,21 @@ const router = new VueRouter({
                     name: 'friend_edit',
                     component: FriendLinkEdit
                 },
-        //         {
-        //             path: '/article',
-        //             name :'article',
-        //             component: Article
-        //         },
-        //         {
-        //             path: '/article_add',
-        //             name :'article_add',
-        //             component: ArticleAdd
-        //         },
-        //         {
-        //             path: '/article_edit',
-        //             name :'article_edit',
-        //             component: ArticleEdit
-        //         },
+                {
+                    path: '/article',
+                    name: 'article',
+                    component: Article
+                },
+                {
+                    path: '/article_add',
+                    name: 'article_add',
+                    component: ArticleAdd
+                },
+                {
+                    path: '/article_edit',
+                    name :'article_edit',
+                    component: ArticleEdit
+                },
         //         {
         //             path: '/comment',
         //             name :'comment',

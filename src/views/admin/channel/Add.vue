@@ -59,7 +59,7 @@
                             action="string"
                             :show-file-list="false"
                             :http-request="uploadImg"
-                            :before-upload="beforeAvatarUpload">
+                            :before-upload="beforeImageUpload">
                         <img v-if="formData.channelImg" :src="formData.channelImg" class="new-avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"/>
                     </el-upload>
@@ -122,7 +122,7 @@
         },
         methods: {
             getParentTreeDate() {
-                channelApi.getParentTreeDate()
+                channelApi.getParentTreeData()
                     .then(response => {
                         this.treeDate = response.data
                     }).catch(error => {
@@ -161,12 +161,11 @@
                 channelApi.uploadChannelImage(formData)
                     .then(response => {
                         this.formData.channelImg = response.data
-                        console.log(response.data)
                     }).catch(error => {
                         console.log(error)
                     })
             },
-            beforeAvatarUpload(file) {
+            beforeImageUpload(file) {
                 const isIMAGE = (file.type === 'image/jpeg') || (file.type === 'image/jpg') || (file.type ==='image/png')
                 const isLt2M = file.size / 1024 / 1024 < 2
 

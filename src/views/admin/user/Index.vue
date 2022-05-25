@@ -71,7 +71,7 @@
                 formData: {},
                 total: 0,
                 current: 1,
-                limit: 3,
+                limit: 7,
                 addVisble: false,
                 editVisble: false
             }

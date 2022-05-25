@@ -1,28 +1,27 @@
 <template>
-    <div v-title data-title="HuaruoYM | Friend Link">
+    <div v-title data-title="HuaruoYM | Article">
         <div>
             <el-form :inline="true" ref="queryForm" :model="queryForm" label-width="80px">
                 <el-form-item>
-                    <el-input v-model="queryForm.title" placeholder="Search by title"/>
+                    <el-input v-model="queryForm.title" placeholder="Search by title"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button icon="el-icon-search" @click="search" type="primary">Search</el-button>
-                    <el-button icon="el-icon-plus" @click="add" type="success">Add</el-button>
+                    <el-button icon="el-icon-search" @click="search" type="primary" >Search</el-button>
+                    <el-button icon="el-icon-plus" @click="add" type="success" >Add</el-button>
                 </el-form-item>
             </el-form>
         </div>
 
         <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="id" label="ID" align="center"/>
+            <el-table-column prop="id" label="Id" align="center"/>
             <el-table-column prop="title" label="Title" align="center"/>
-            <el-table-column prop="url" label="URL" align="center"/>
-            <el-table-column prop="target" label="Open Method" align="center"/>
-
-
-            <el-table-column label="Opeartion" align="center">
+            <el-table-column prop="articleView" label="View" align="center"/>
+            <el-table-column prop="user.userName" label="Create User Name" align="center"/>
+            <el-table-column prop="createTime" label="Create Time" align="center"/>
+            <el-table-column label="Operation" align="center">
                 <template slot-scope="scope">
                     <el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit"/>
-                    <el-button @click="del(scope.row)"  size="small" type="danger" icon="el-icon-delete"/>
+                    <el-button @click="del(scope.row)" size="small" type="danger" icon="el-icon-delete"/>
                 </template>
             </el-table-column>
         </el-table>
@@ -39,7 +38,8 @@
 </template>
 
 <script>
-    import friendlinkApi from '@/api/admin/friendlink'
+    // import {query,del} from "@/api/article";
+    import articleApi from '@/api/admin/article'
 
     export default {
         name: "Index",
@@ -50,56 +50,54 @@
                     userName: ''
                 },
                 tableData: [],
-                formData: {},
                 current: 1,
                 limit: 7,
                 total: 0
             }
         },
         created() {
-            this.getAllFriendLinkPaginatedList()
+            this.getAllArticlePaginatedList()
         },
         methods: {
-            getAllFriendLinkPaginatedList() {
-                friendlinkApi.getFriendLinkQueryPaginatedList(this.current, this.limit, this.queryForm)
+            getAllArticlePaginatedList() {
+                articleApi.getArticleQueryPaginatedList(this.current, this.limit, this.queryForm)
                     .then(response => {
                         this.tableData = response.data.records
                         this.total = response.data.total
-                        console.log(response.data)
                     }).catch(error => {
                         console.log(error)
                     })
             },
             add() {
-                this.$router.push('/friend_add')
+                this.$router.push('/article_add')
             },
             edit(row) {
                 this.queryForm = row
+
                 this.$router.push({
-                    path:'/friend_edit',
-                    query:{
+                    path: '/article_edit',
+                    query: {
                         id: row.id
                     }
                 })
             },
-            del(row) {
-                this.$confirm('Are you sure to delete this link "' + row.title + '" ?', 'Inform')
-                    .then(() => {
-                        friendlinkApi.deleteFriendLinkById(row.id)
-                            .then(response => {
-                                this.$message.success(response.message)
-                                this.current = 1
-                                this.getAllFriendLinkPaginatedList()
-                            }).catch(error => {
-                                console.log(error)
-                            })
-                    }).catch(error => {
-                        console.log(error)
+            del(row){
+                this.$confirm('确定要删除'+row.title+'文章吗？','提示').then(()=>{
+                    del (row.id).then(data=>{
+                        let param= this.queryForm
+                        param.page =this.pageNo
+                        this.list(param)
+                    }).catch(error=>{
+
+                        this.$message.error(error)
                     })
+                }).catch(error=>{
+
+                })
             },
             handleCurrentChange(val) {
                 this.current = val
-                this.getAllFriendLinkPaginatedList()
+                this.getAllArticlePaginatedList()
             }
         }
     }
