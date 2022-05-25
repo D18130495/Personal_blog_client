@@ -7,22 +7,22 @@ import BIndex from "../views/admin/Index"
 import User from "../views/admin/user/Index"
 import Info from "../views/admin/user/Info"
 
+import Article from "../views/admin/article/Index"
+import ArticleAdd from '../views/admin/article/Add'
+import ArticleEdit from '../views/admin/article/Edit'
+
 import Channel from "../views/admin/channel/Index"
 import Channel_add from "../views/admin/channel/Add"
 import Channel_edit from "../views/admin/channel/Edit"
-
-import Tag from "../views/admin/tag/Index"
 
 import FriendLink from "../views/admin/friendlink/Index"
 import FriendLinkAdd from "../views/admin/friendlink/Add"
 import FriendLinkEdit from "../views/admin/friendlink/Edit"
 
-import Article from "../views/admin/article/Index"
-import ArticleAdd from '../views/admin/article/Add'
-import ArticleEdit from '../views/admin/article/Edit'
+import Tag from "../views/admin/tag/Index"
 
-// import Comment from "../views/admin/comment/Index";
-// import Check from "../views/admin/comment/Checkl";
+import Comment from "../views/admin/comment/Index"
+import Check from "../views/admin/comment/Check"
 
 import FIndex from '../views/front/Index'
 import List from '../views/front/List'
@@ -152,19 +152,19 @@ const router = new VueRouter({
                 },
                 {
                     path: '/article_edit',
-                    name :'article_edit',
+                    name: 'article_edit',
                     component: ArticleEdit
                 },
-        //         {
-        //             path: '/comment',
-        //             name :'comment',
-        //             component: Comment
-        //         },
-        //         {
-        //             path: '/comment_check',
-        //             name :'comment_check',
-        //             component: Check
-        //         }
+                {
+                    path: '/comment',
+                    name: 'comment',
+                    component: Comment
+                },
+                {
+                    path: '/comment_check',
+                    name: 'comment_check',
+                    component: Check
+                }
             ]
         }
     ]
