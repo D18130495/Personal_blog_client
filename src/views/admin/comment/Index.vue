@@ -43,7 +43,6 @@
 </template>
 
 <script>
-    // import {del,getStatusComment} from "@/api/comment"
     import commentApi from '@/api/admin/comment'
 
     export default {

@@ -47,6 +47,8 @@
                 current: 1,
                 limit: 7,
                 total: 0,
+                acceptStatus: 1,
+                unacceptStatus: 2,
                 number:''
             }
         },
@@ -78,27 +80,29 @@
                     })
             },
             accept(row) {
-                this.$confirm('确定通过此条评论吗？','提示')
+                this.$confirm('Are you sure to accept this comment?', 'Inform')
                     .then(() => {
-                        getupdateStatus (row.id).then(response => {
-                            this.$message.success(response.message)
-                            this.getAllUnacceptCommentPaginatedList()
-                        }).catch(error => {
-                            console.log(error)
-                        })
+                        commentApi.updateCommentStatusByCommentId(row.id, this.acceptStatus)
+                            .then(response => {
+                                this.$message.success(response.message)
+                                this.getAllUnacceptCommentPaginatedList()
+                            }).catch(error => {
+                                console.log(error)
+                            })
                     }).catch(error => {
                         console.log(error)
                     })
             },
             unaccept(row) {
-                this.$confirm('确定通过此条评论吗？','提示')
+                this.$confirm('Are you sure to unaccept this comment?', 'Inform')
                     .then(() => {
-                   getupdateStatus (row.id).then(response => {
-                            this.$message.success(response.message)
-                            this.getAllUnacceptCommentPaginatedList()
-                        }).catch(error => {
-                            console.log(error)
-                        })
+                        commentApi.updateCommentStatusByCommentId(row.id, this.unacceptStatus)
+                            .then(response => {
+                                this.$message.success(response.message)
+                                this.getAllUnacceptCommentPaginatedList()
+                            }).catch(error => {
+                                console.log(error)
+                            })
                     }).catch(error => {
                         console.log(error)
                     })

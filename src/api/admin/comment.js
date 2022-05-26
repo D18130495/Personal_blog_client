@@ -1,11 +1,10 @@
 import request from '@/utils/request'
 
 export default {
-  updateTagByTagId(formData) {
+  updateCommentStatusByCommentId(commentId, status) {
     return request({
-      url: `/admin/tag/updateTagByTagId`,
-      method: 'put',
-      params: formData
+      url: `/admin/comment/updateCommentStatusByCommentId/${commentId}/${status}`,
+      method: 'put'
     })
   },
   deleteCommentById(commentId) {
