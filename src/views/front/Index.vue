@@ -21,8 +21,8 @@
 </template>
 
 <script>
-    import  '@/assets/css/base.css'
-    import  '@/assets/css/m.css'
+    import '@/assets/css/base.css'
+    import '@/assets/css/m.css'
     import Header from "../../components/front/Header"
     import Swiper from "../../components/front/Swiper"
     import HeaderLine from "../../components/front/HeaderLine"
@@ -50,7 +50,7 @@
             FriendLink,
             Footer
         },
-        data(){
+        data() {
             return{
                 articles: [],
                 pages: '',
@@ -58,28 +58,23 @@
                 pageNo: '',
                 xx: true,
                 newData: '',
-                title:''
+                title: ''
             }
         },
-        beforeRouteUpdate(to, from, next){
+        beforeRouteUpdate(to, from, next) {
             this.xx = false
             this.$nextTick(() => {
                 this.xx = true
             })
             next()
         },
-        methods:{
+        methods: {
             parentEven(data) {
-                console.log(data)
-                console.log(data)
-                console.log('aaaa')
                 this.newData = data
             },
-            parentEvenTitle(data){
+            parentEvenTitle(data) {
                 this.title = data
             }
-        },
-        mounted() {
         }
     }
 </script>

@@ -20,7 +20,7 @@ const store = new Vuex.Store({
         }
     },
     actions:{
-        login({commit}, userInfo){
+        login({commit}, userInfo) {
             return new Promise((resolve, reject) => {
                 userApi.login(userInfo)
                     .then(response => {

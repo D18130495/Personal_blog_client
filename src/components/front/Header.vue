@@ -3,7 +3,7 @@
         <header id="header">
             <div class="navbox">
                 <h2 id="mnavh" >
-                    <span class="navicon"></span>
+                    <span class="navicon"/>
                 </h2>
                 <div class="logo">
                     <a href="/">HuaruoYM Blog</a>
@@ -24,49 +24,49 @@
                             </ul>
                         </li>
                         <li >
-                            <router-link to="/login" target="_blank">后台管理</router-link>
+                            <router-link to="/index" target="_blank">后台管理</router-link>
                         </li>
                     </ul>
                 </nav>
-                <div class="searchico"></div>
+                <div class="searchico"/>
             </div>
         </header>
-        <!-- <div class="searchbox">
+
+        <div class="searchbox">
             <div class="search">
                 <div>
                     <el-form :inline="true" ref="queryForm" :model="queryForm" label-width="80px">
                         <el-form-item>
-                            <el-input v-model="queryForm.title" style="width: 330px" placeholder="按标题查询"></el-input>
+                            <el-input v-model="queryForm.title" style="width: 330px" placeholder="Search by article title"/>
                         </el-form-item>
                         <el-form-item>
-                            <a href="#content"  name="search">
-                                <el-button icon="el-icon-search" @click="search" type="primary" >查询</el-button>
+                            <a href="#content" name="search">
+                                <el-button icon="el-icon-search" @click="search" type="primary" >Search</el-button>
                             </a>
                         </el-form-item>
                     </el-form>
                 </div>
-
-               
             </div>
-            <div class="searchclose"></div>
-        </div> -->
+            <div class="searchclose"/>
+        </div>
     </div>
 </template>
 
 <script>
+    import articleApi from '@/api/front/article'
     import channelApi from '@/api/front/channel'
     import $ from 'jquery'
 
     export default {
-        data(){
+        data() {
             return{
                 channels: [],
-                queryForm:{
-                    name:'',
-                    userName: ''
+                queryForm: {
+                    title: ''
                 },
-                articles:[],
-                pageNo :1,
+                articles: [],
+                current: 1,
+                limit: 4
             }
         },
         created() {
@@ -91,32 +91,28 @@
         methods:{
             getChannelA() {
                 channelApi.getChannelByPos('a')
-                    .then(response =>{
+                    .then(response => {
                         this.channels = response.data
-                    }).catch(error=>{
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            search() {
+                this.current = 1
+                this.list()
+            },
+            list() {
+                articleApi.getArticleQueryPaginatedList(this.current, this.limit, this.queryForm)
+                    .then(response => {
+                        this.articles = response.data
+                        this.$emit('child-even', this.articles)
+                        this.$emit('child-evenTitle', this.queryForm.title)
+                    }).catch(error => {
                         console.log(error)
                     })
             }
-            // search(){
-            //     let  param =this.queryForm
-            //     this.pageNo =1
-            //     param.page=this.pageNo
-            //     this.list(param)
-            // },
-            // list(param){
-            //     search(param).then(data=>{
-            //         this.articles=data
-            //         this.$emit('child-even',this.articles)
-            //         this.$emit('child-evenTitle',this.queryForm.title)
-            //         this.total=data.total
-            //     }).catch(error=>{
-            //         this.$message.error(error)
-            //     })
-            // },
         }
     }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped/>

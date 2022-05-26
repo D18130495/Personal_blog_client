@@ -41,23 +41,23 @@ const router = new VueRouter({
             path: '/',
             name: 'Index',
             component: FIndex,
-            meta:{
+            meta: {
                 requireLogin: false
             }
         },
-        // {
-        //     path: '/content',
-        //     name: 'fIndex',
-        //     component: FIndex,
-        //     meta:{
-        //         requireLogin: false
-        //     }
-        // },
+        {
+            path: '/content',
+            name: 'fIndex',
+            component: FIndex,
+            meta: {
+                requireLogin: false
+            }
+        },
         {
             path: '/list/:id',
             name: 'List',
             component: List,
-            meta:{
+            meta: {
                 requireLogin: false
             }
         },
@@ -65,7 +65,7 @@ const router = new VueRouter({
             path: '/detail/:id',
             name: 'Detail',
             component: Detail,
-            meta:{
+            meta: {
                 requireLogin: false
             }
         },
@@ -73,7 +73,7 @@ const router = new VueRouter({
             path: '/channel_detail/:id',
             name: 'channel_detail',
             component: ChannelDetail,
-            meta:{
+            meta: {
                 requireLogin: false
             }
         },
@@ -81,7 +81,7 @@ const router = new VueRouter({
             path: '/tag_list/:id',
             name: 'tag_list',
             component: TagList,
-            meta:{
+            meta: {
                 requireLogin: false
             }
         },
@@ -94,7 +94,7 @@ const router = new VueRouter({
             path: '/index',
             name: 'index',
             component: BIndex,
-            children:[
+            children: [
                 {
                     path: '/user',
                     name: 'User',
@@ -171,20 +171,20 @@ const router = new VueRouter({
 })
 
 
-// router.beforeEach((to, from, next) => {
-//     if (!to.matched.some(r => r.meta.requireLogin)) {
-//         next()
-//     }else {
-//         if (token.get()){
-//             next()
-//         }else {
-//             if (to.path === '/login'){
-//                 next()
-//             } else {
-//                 next('/login')
-//             }
-//         }
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    if(!to.matched.some(r => r.meta.requireLogin)) {
+        next()
+    }else {
+        if(token.get()) {
+            next()
+        }else {
+            if (to.path == '/login') {
+                next()
+            } else {
+                next('/login')
+            }
+        }
+    }
+})
 
 export default  router

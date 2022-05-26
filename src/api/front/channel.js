@@ -1,6 +1,9 @@
 import request from '@/utils/request'
 
 export default {
+    search() {
+
+    },
     getChannelByPos(pos) {
       return request({
         url: `front/channel/getChannelByPos/${pos}`,

@@ -60,5 +60,12 @@ export default {
       url: `front/article/getPaginatedTagArticleByTagId/${current}/${limit}/${tagId}`,
       method: 'get'
     })
+  },
+  getArticleQueryPaginatedList(current, limit, queryForm) {
+    return request({
+      url: `front/article/getArticleQueryPaginatedList/${current}/${limit}`,
+      method: 'get',
+      params: queryForm
+    })
   }
 }

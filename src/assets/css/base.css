@@ -15,7 +15,7 @@ a:hover { color: #000; text-decoration: none; }
 .mt20 { margin-top: 20px; }
 .blue { color: #00C1DE }
 /*header*/
-header { width: 100%; padding: 5px 0; background: #7B68EE; height: 50px; }
+header { width: 100%; padding: 5px 0; background: #000000; height: 50px; }
 /* header::before { background: #000 linear-gradient(to left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55); content: ""; height: 5px; position: absolute; top: 0; width: 100%; } */
 .logo { float: left; margin-right: 60px; line-height: 50px; color: #FFF; font-size: 22px }
 .logo a { color: #FFF }
@@ -28,7 +28,7 @@ nav { float: left; height: 50px; line-height: 50px; text-align: center; }
 #starlist li a { display: inline; float: left; padding: 0 20px; color: #fff }
 #starlist li a:hover, #starlist #selected, .selected > a, #starlist li:hover { color: #00c1de; }
 #starlist li:hover a { color: #00c1de }
-#starlist ul.sub { overflow: hidden; position: absolute; left: 0; top: 50px; background: #7B68EE; display: none; z-index: 9 }
+#starlist ul.sub { overflow: hidden; position: absolute; left: 0; top: 50px; background: #000000; display: none; z-index: 9 }
 #starlist ul.sub li { height: 30px; line-height: 30px; font-size: 16px; }
 #starlist ul.sub li:last-child { padding-bottom: 10px }
 #starlist ul.sub li a { color: #FFF }
@@ -50,7 +50,7 @@ nav { float: left; height: 50px; line-height: 50px; text-align: center; }
 .menu span { display: none; width: 50px; height: 50px; background: #12b7de; opacity: 0.5; position: absolute; top: 0; right: 0; border-left: #49ccea 1px solid; }
 /*search*/
 .searchico { margin-top: 5px; width: 39px; height: 39px; float: right; display: inline; cursor: pointer; background: url(../images/bg.png) no-repeat center !important; }
-.searchbox { width: 1200px; margin: 10px auto; overflow: hidden; background: #ffffff; position: relative; }
+.searchbox { width: 1200px; margin: auto; overflow: hidden; background: #ffffff; position: relative; }
 .search { width: 50%; margin: 20px auto;  border-radius: 0 5px 5px 0; position: relative;  display: none; }
 .search input.input_submit { border: 0; background: 0; color: #fff; outline: none; position: absolute; top: 10px; right: 10% }
 .search input.input_text { border: 0; line-height: 36px; height: 36px; width: 72%; padding-left: 10px; outline: none }
@@ -169,7 +169,7 @@ a.viewmore { display: block; right: 10px; bottom: 20px; position: absolute; padd
 .links li:hover { background: #f7f7f7 }
 /*rbox*/
 .rbox { width: 23.5%; float: right; overflow: hidden; margin-top: 25px }
-.card { box-shadow: 0px 1px 0px rgba(0, 139, 139, 0.1), inset 0px 1px 1px rgba(0, 139, 139, 0.7); border-radius: 3px; background: url(../images/quote-bg.png) no-repeat top right #7B68EE; height: 260px; overflow: hidden; margin-bottom: 20px;}
+.card { box-shadow: 0px 1px 0px rgba(0, 139, 139, 0.1), inset 0px 1px 1px rgba(0, 139, 139, 0.7); border-radius: 3px; background: url(../images/quote-bg.png) no-repeat top right #000000; height: 260px; overflow: hidden; margin-bottom: 20px;}
 .card h2 { font-size: 22px; margin: 10px; color: #f8f8f8; font-weight: normal; padding-bottom: 10px; }
 .card p { font-size: 14px; padding: 0 0 0 20px; line-height: 28px; text-shadow: 0px 1px 2px rgba(0,0,0,.5); color: #d0d2d4; -webkit-animation: animations2 5s ease-in-out 5s; -moz-animation: animations2 5s ease-in-out 5s; -o-animation: animations2 5s ease-in-out 5s; -ms-animation: animations2 5s ease-in-out 5s; animation: animations2 5s ease-in-out 5s; }
 .linkmore { margin: 15px }
@@ -239,7 +239,7 @@ a.iconfont.icon-whatsapp { color: #07AF12; background: url(../images/c05.png) no
 .tongji_gzh { width: 80%; margin: auto; overflow: hidden; }
 .tongji_gzh img { width: 100% }
 /*footer*/
-footer { background: #7B68EE; width: 100%; padding: 30px 0; color: #f8f8f8; font-size: 14px; }
+footer { background: #000000; width: 100%; padding: 30px 0; color: #f8f8f8; font-size: 14px; }
 .wxbox { overflow: hidden; float: left; margin-right: 20px }
 .wxbox li { float: left; margin: 0 10px; text-align: center }
 .wxbox img { height: 100px }

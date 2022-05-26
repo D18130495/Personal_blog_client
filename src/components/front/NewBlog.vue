@@ -84,35 +84,38 @@
 
 <script>
     import articleApi from '@/api/front/article'
-    // import {getPageList, getNewBlogTop, search} from "@/api/front";
     // import evenBus from  '@/utils/evenBus'
 
     export default {
         name: "NewBlog",
-        props:['search', 'childevenTitle'],
+        props:[
+            'search',
+            'childevenTitle'
+        ],
         watch: {
-            search: function(newVal, oldVal){
-                this.articles=newVal.list
-                this.total=newVal.total
-                this.truth=true
+            search: function(newVal, oldVal) {
+                this.articles = newVal.records
+                this.total = newVal.total
+                this.truth = true
             },
-            childevenTitle: function(newVal,oldVal){
+            childevenTitle: function(newVal, oldVal) {
                this.queryForm.title = newVal
             },
         },
-        data(){
-            return{
+        data() {
+            return {
                 articles: [],
                 toppedArticles: [],
                 searchs: [],
                 truth: false,
                 current: 1,
-                limit: 5,
+                limit: 4,
                 total: 0,
                 enven: '',
                 queryForm: {
                     name: '',
-                    userName: ''
+                    userName: '',
+                    title: ''
                 },
             }
         },
@@ -121,7 +124,7 @@
             this.getToppedArticleList()
             this.getPaginatedArticlesList(this.current)
         },
-        methods:{
+        methods: {
             getPaginatedArticlesList(current) {
                 articleApi.getPaginatedArticlesList(current, this.limit)
                     .then(response => {
@@ -133,41 +136,37 @@
             },
             getToppedArticleList() {
                 articleApi.getToppedArticleList()
-                    .then(response =>{
+                    .then(response => {
                         this.toppedArticles = response.data
                     }).catch(error => {
                         console.log(error)
                     })
             },
-            handleCurrentChange(val){
+            handleCurrentChange(val) {
                 this.current = val
 
-                if (this.truth) {
+                if(this.truth) {
                     this.getSearchPage(val)
                 }else {
                     this.getPaginatedArticlesList(this.current)
                 }
             },
-            searchPage(param){
-                search(param).then(data=>{
-                    this.articles=data.list
-                    this.total=data.total
-                }).catch(error=>{
-                    this.$message.error(error)
-                })
+            searchPage() {
+                articleApi.getArticleQueryPaginatedList(this.current, this.limit, this.queryForm)
+                    .then(response => {
+                        this.articles = response.data.records
+                        this.total = response.data.total
+                    }).catch(error => {
+                        console.log(error)
+                    })
             },
-            getSearchPage(val){
-                console.log('向父组件传值')
-                let  param =this.queryForm
-                this.pageNo =val
-                param.page=this.pageNo
-                this.searchPage(param)
-                console.log('传参数的里面')
-                console.log(this.articles)
+            getSearchPage(val) {
+                this.current = val
+                this.searchPage()
             },
-            getEvenData(){
+            getEvenData() {
                 evenBus.$on('a',function (val) {
-                    this.enven=val
+                    this.enven = val
                 })
             }
         }
