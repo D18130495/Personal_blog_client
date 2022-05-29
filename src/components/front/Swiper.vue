@@ -1,16 +1,11 @@
 <template>
     <div class="banbox">
         <el-carousel height="260px" interval="5000" direction="vertical">
-            <el-carousel-item v-for="(slider, index) in sliders" :key="index">
-                <!-- <span v-if="hover" style="background-colour: black">这里是秘密消息</span> -->
-                <!-- <div v-if="hover" class="hover">
-                    文字
-                </div> -->
-                
+            <el-carousel-item v-for="(slider, index) in sliders" :key="index">      
                 <div class="back">
                     <span class="text" v-if="hover">{{ slider.text }}</span> 
                     <img :class="hover? 'image-hover' : 'image'" :src="slider.img" width="100%" 
-                    @mouseover="hover = true" @mouseleave="hover = false">
+                    @mouseover="hover=true" @mouseleave="hover=false">
                 </div>
             </el-carousel-item>
         </el-carousel>

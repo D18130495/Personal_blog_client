@@ -6,7 +6,13 @@
         <p><i class="el-icon-school"/> Technological University Dublin</p>
         <p><i class="el-icon-message"/> 990415zys@gmail.com</p>
         <ul class="linkmore">
-            <li><a href="/" class="iconfont icon-zhuye" title="Home"/></li>
+            <li><a href="/" class="iconfont icon-zhuye" title="Home"/>
+             <li id="weixin">
+                <a class="iconfont icon-qq" title="QQ"/>
+                <i>
+                    <img src="@/assets/images/QQ.jpg">
+                </i>
+            </li>
             <li id="weixin">
                 <a class="iconfont icon-weixin" title="Wechat"/>
                 <i>

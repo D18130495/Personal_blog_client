@@ -182,7 +182,7 @@ a.iconfont.icon-qq { color: #1296DB; background: url(../images/c03.png) no-repea
 a.iconfont.icon-weixin { color: #07AF12; background: url(../images/c04.png) no-repeat center; }
 a.iconfont.icon-whatsapp { color: #07AF12; background: url(../images/c05.png) no-repeat center; }
 #weixin { position: relative }
-#weixin i { display: block; position: absolute; bottom: 55px; left: 0; }
+#weixin i { display: block; position: absolute; bottom: 55px; right: 0; }
 #weixin i img { height: 100px; display: none }
 #weixin:hover i img { display: block }
 /*htitle*/
