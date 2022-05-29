@@ -1,27 +1,44 @@
 <template>
     <div class="banbox">
-        <swiper :options="swiperOption" style="height: 260px;">
-            <swiper-slide v-for="(item,index) in sliders" :key="index">
-                <router-link :to="item.url" target="_blank">
-                    <img :src="item.img" width="100%" alt="">
+        <el-carousel height="260px" interval="5000" direction="vertical">
+            <el-carousel-item v-for="(slider, index) in sliders" :key="index">
+                <!-- <span v-if="hover" style="background-colour: black">这里是秘密消息</span> -->
+                <!-- <div v-if="hover" class="hover">
+                    文字
+                </div> -->
+                
+                <div class="back">
+                    <span class="text" v-if="hover">{{ slider.text }}</span> 
+                    <img :class="hover? 'image-hover' : 'image'" :src="slider.img" width="100%" 
+                    @mouseover="hover = true" @mouseleave="hover = false">
+                </div>
+            </el-carousel-item>
+        </el-carousel>
+        <!-- <swiper :options="swiperOption" style="height: 260px;">
+            <swiper-slide v-for="(slider, index) in sliders" :key="index">
+                <router-link :to="slider.url" target="_blank">
+                    <img :src="slider.img" width="100%" alt="">
                 </router-link>
             </swiper-slide>
-        </swiper>
+        </swiper> -->
     </div>
 </template>
 
 <script>
-    import SwiperCore, { Autoplay } from 'swiper'
-    SwiperCore.use([ Autoplay ])
+    import title1 from '../../assets/images/title1.png'
+    import title2 from '../../assets/images/title2.jpg'
+    import title3 from '../../assets/images/title3.jpg'
+    // import SwiperCore, { Autoplay } from 'swiper'
+    // SwiperCore.use([ Autoplay ])
 
-    import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-    import 'swiper/swiper-bundle.css'
+    // import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+    // import 'swiper/swiper-bundle.css'
 
     export default {
         name: "SwiperHeader",
         components:{
-            Swiper,
-            SwiperSlide
+            // Swiper,
+            // SwiperSlide
         },
         data(){
             return{
@@ -33,21 +50,46 @@
                 },
                 sliders:[
                     {
-                       "img": "https://www.lego.com/cdn/cs/set/assets/bltee88e5e65f00bd00/42115.jpg?fit=bounds&format=webply&quality=80&width=528&height=528&dpr=1",
+                        text: "Title1",
+                        img: title1,
+                        url: "www.baidu.com "
+                    },
+                    {
+                        text: "Title2",
+                       "img": title2,
                         url:"www.baidu.com "
                     },
                     {
-                       "img": "https://www.lego.com/cdn/cs/set/assets/bltee88e5e65f00bd00/42115.jpg?fit=bounds&format=webply&quality=80&width=528&height=528&dpr=1",
-                        url:"www.baidu.com "
-                    },
-                    {
-                       "img": "https://www.lego.com/cdn/cs/set/assets/bltee88e5e65f00bd00/42115.jpg?fit=bounds&format=webply&quality=80&width=528&height=528&dpr=1",
+                        text: "Title3",
+                       "img": title3,
                         url:"www.baidu.com "
                     }
                 ],
+                hover: false
             }
         }
     }
 </script>
 
-<style scoped/>
+<style scoped>
+.back {
+    background: #000;
+}
+
+.text {
+    line-height: 100px;
+    font-size: 40px;
+    margin-left: 6%;
+    color: #ffffff;
+    position: absolute;
+}
+
+.image-hover {
+    opacity: 0.55;
+    filter: alpha(opacity=60);
+}
+
+.image2 {
+    opacity: 1;
+}
+</style>
