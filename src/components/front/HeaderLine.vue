@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <router-link :to='"/detail/" + title1.id' :title="title1.title" target="_blank">
-                    <img src='@/assets/images/title1.png' alt="">
+                    <img :src="title1.titleImg" alt="">
                     <span>
                         {{ title1.title }}
                     </span>
@@ -11,7 +11,7 @@
             </li>
             <li>
                 <router-link :to='"/detail/" + title2.id' :title="title2.title" target="_blank">
-                    <img src='@/assets/images/title2.jpg' alt="">
+                    <img :src="title2.titleImg" alt="">
                     <span>
                         {{ title2.title }}
                     </span>
@@ -26,7 +26,7 @@
 
     export default {
         name: "HeaderLine",
-        data(){
+        data() {
             return{
                 articles: [],
                 title1: [],

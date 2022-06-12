@@ -3,7 +3,7 @@
         <template>
             <div class="tab_buttons">
                 <ul>
-                    <li v-for="(channel, index) in channels" :key="index"  @click="curlist(channel.id)" :class="{newscurrent: cur == channel.id}">
+                    <li v-for="(channel, index) in channels" :key="index" @click="curlist(channel.id)" :class="{newscurrent: cur == channel.id}">
                         {{ channel.name }}
                     </li>
                 </ul>
@@ -15,7 +15,7 @@
                         <ul>
                             <li v-for="(article, index) in articles" :key="index">
                                 <router-link :to='"/detail/" + article.id' :title="article.title" target="_blank">
-                                    <img src="">
+                                    <img :src="article.titleImg">
                                     <span>{{ article.title }}</span>
                                 </router-link>
                             </li>

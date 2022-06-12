@@ -1,5 +1,5 @@
 <template>
-    <div v-title data-title="Channel">
+    <div v-title data-title="Channel Detail">
         <Header></Header>
         <article>
             <div class="lbox">

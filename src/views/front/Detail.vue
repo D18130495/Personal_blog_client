@@ -78,7 +78,7 @@
                                             <a href="#comment-2383"/><br>
                                             <span class="comment-aux">
                                                 {{ comment.createTime }}
-                                                <a class="comment-edit-link" href="#">Edit</a>
+                                                <!-- <a class="comment-edit-link" href="#">Edit</a> -->
                                             </span>
                                         </span>
 

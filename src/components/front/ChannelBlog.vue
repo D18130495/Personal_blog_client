@@ -7,11 +7,15 @@
                         Home
                     </a>
                     &gt;
+                    <router-link :to='"/channel_detail/" + parentChannel.id'>
+                        {{ parentChannel.name }}
+                    </router-link>
+                    &gt;
                     <router-link :to='"/list/" + channel.id'>
                         {{ channel.name }}
                     </router-link>
             </span>
-            {{ channel.name }} channel related articles
+            {{ channel.name }} related articles
         </h2>
 
         <ul>
@@ -63,11 +67,14 @@
 
                 <p class="blogtext">{{ article.summary }}</p>
                 <p class="bloginfo">
-                    <i class="avatar"><img :src="article.user.avatar"></i>
+                    <i class="avatar">
+                        <img v-if="article.user.avatar == null || article.user.avatar == '' " src="@/assets/images/avatar1.jpg">
+                        <img v-else :src="article.user.avatar">
+                    </i>
                     <span>{{ article.user.nickName }}</span>
                     <span>{{ article.createTime }}</span>
                 </p>
-                <router-link :to='"/detail/" + article.id' target="_blank" class="viewmore"> More</router-link >
+                <router-link :to='"/detail/" + article.id' target="_blank" class="viewmore">More</router-link >
             </li>
         </ul>
 
@@ -95,6 +102,7 @@
                 articles: [],
                 channelId : '',
                 channel: {},
+                parentChannel: {},
                 toppedArticles: [],
                 current: 1,
                 limit: 1,
@@ -103,7 +111,9 @@
         },
         beforeRouteUpdate(to, from, next){
             this.channelId = to.params.id
+            this.getToppedArticleList()
             this.getChannelArticleList()
+            this.getChannelByChannelId()
             next()
         },
         created() {
@@ -134,6 +144,15 @@
                 channelApi.getChannelByChannelId(this.channelId)
                     .then(response => {
                         this.channel = response.data
+                        this.getParentChannelByParentId()
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            getParentChannelByParentId() {
+                channelApi.getChannelByChannelId(this.channel.parentId)
+                    .then(response => {
+                        this.parentChannel = response.data
                     }).catch(error => {
                         console.log(error)
                     })

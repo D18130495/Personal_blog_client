@@ -31,7 +31,7 @@
                     </i>
 
                     <router-link :to='"/detail/" + article.id' target="_blank">
-                        <img v-if="article.titleImg == null || article.titleImg == ''" width="130px" height="120px" src="http://shunxinblog.oss-cn-hangzhou.aliyuncs.com/2021/01/03/c188ca3b0ca94de7b0eaa6b2589659c2.jpg" alt="">
+                        <img v-if="article.titleImg == null || article.titleImg == ''" width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
                         <img v-else width="130px" height="130px" :src="article.titleImg" alt="">
                     </router-link>
                 </span>

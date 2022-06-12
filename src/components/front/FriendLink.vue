@@ -4,7 +4,7 @@
         <div class="ad whitebg imgscale">
             <ul>
                 <a href="/">
-                    <img src="">
+                    <img src="@/assets/images/title1.png">
                 </a>
             </ul>
         </div>

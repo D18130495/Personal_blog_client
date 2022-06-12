@@ -27,5 +27,11 @@ export default {
         url: `front/channel/getPaginatedChannelArticleByChannelId/${current}/${limit}/${channelId}`,
         method: 'get'
       })
+    },
+    getChildrenChannelListByParentChannelId(channelId) {
+      return request({
+        url: `front/channel/getChildrenChannelListByParentChannelId/${channelId}`,
+        method: 'get'
+      })
     }
 }
