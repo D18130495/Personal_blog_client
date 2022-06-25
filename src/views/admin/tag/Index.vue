@@ -81,6 +81,15 @@
                         console.log(error)
                     })
             },
+            search() {
+                tagApi.getTagQueryPaginatedList(this.current, this.limit, this.queryForm)
+                    .then(response => {
+                        this.tableData = response.data.records
+                        this.total = response.data.total
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
             add() {
                 this.addVisble = true
             },

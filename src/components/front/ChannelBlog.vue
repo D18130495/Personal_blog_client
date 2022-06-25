@@ -60,8 +60,8 @@
                     </i>
                     
                     <router-link :to='"/detail/" + article.id' target="_blank">
-                        <img v-if="article.titleImg == null || article.titleImg==''" width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
-                        <img v-else :src="article.titleImg"  width="130px" height="120px" alt="article image">
+                        <img v-if="article.titleImg == null || article.titleImg==''" width="130px" height="120px" src="@/assets/images/flower.jpg">
+                        <img v-else :src="article.titleImg" width="130px" height="120px" alt="article image">
                     </router-link>
                 </span>
 
