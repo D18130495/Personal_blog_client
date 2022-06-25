@@ -60,15 +60,15 @@
                     </i>
                     
                     <router-link :to='"/detail/" + article.id' target="_blank">
-                        <img v-if="article.titleImg == null || article.titleImg=='' " width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
-                        <img v-else  :src="article.titleImg"  height="120px" alt="">
+                        <img v-if="article.titleImg == null || article.titleImg==''" width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
+                        <img v-else :src="article.titleImg"  width="130px" height="120px" alt="article image">
                     </router-link>
                 </span>
 
                 <p class="blogtext">{{ article.summary }}</p>
                 <p class="bloginfo">
                     <i class="avatar">
-                        <img v-if="article.user.avatar == null || article.user.avatar == '' " src="@/assets/images/avatar1.jpg">
+                        <img v-if="article.user.avatar == null || article.user.avatar == ''" src="@/assets/images/avatar1.jpg">
                         <img v-else :src="article.user.avatar">
                     </i>
                     <span>{{ article.user.nickName }}</span>

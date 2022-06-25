@@ -2,7 +2,7 @@
     <div class="whitebg wenzi" v-if="articles">
         <h2 class="htitle">Recommended For You</h2>
         <ul>
-            <li v-for="(article, index) in articles.slice(0, 8)" :key="index">
+            <li v-for="(article, index) in articles.slice(0, 8)" :key="index" style="list-style: none;">
                 <router-link :to='"/detail/" + article.id' target="_blank">
                     {{ article.title }}
                 </router-link >
@@ -16,12 +16,12 @@
 
     export default {
         name: "Like",
-        data(){
+        data() {
             return{
                 articles: []
             }
         },
-        beforeRouteUpdate(to, from, next){
+        beforeRouteUpdate(to, from, next) {
             articleApi.getRecommendedArticle(to.$route.params.id)
                 .then(response => {
                     this.articles = response.data.articleVo

@@ -32,8 +32,8 @@
                                 </i>
 
                                 <router-link :to='"/list/" + children.id' target="_blank">
-                                    <img v-if="children.channelImg == null || children.channelImg =='' " width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
-                                    <img v-else :src="children.channelImg" alt="channel image" style="height: 130px">
+                                    <img v-if="children.channelImg == null || children.channelImg ==''" width="130px" height="120px" src="@/assets/images/flower.jpg" alt="">
+                                    <img v-else :src="children.channelImg" alt="channel image" width="130px">
                                 </router-link>
                             </span>
 
