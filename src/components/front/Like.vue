@@ -1,5 +1,5 @@
 <template>
-    <div class="whitebg wenzi">
+    <div class="whitebg wenzi" v-if="articles">
         <h2 class="htitle">Recommended For You</h2>
         <ul>
             <li v-for="(article, index) in articles.slice(0, 8)" :key="index">
@@ -36,13 +36,14 @@
             next()
         },
         created() {
-            this.getLikeArticle()    
+            this.getLikeArticle() 
         },
         methods: {
             getLikeArticle() {
                 articleApi.getRecommendedArticle(this.$route.params.id)
                     .then(response => {
                         this.articles = response.data.articleVo
+                        console.log(response.data)
                     })
             }
         }

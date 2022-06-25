@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@bixiao/utils-request": "^2.1.23",
-    "@kangc/v-md-editor": "^1.5.5",
+    "@kangc/v-md-editor": "^1.7.11",
     "@riophae/vue-treeselect": "^0.4.0",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",

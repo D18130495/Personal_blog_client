@@ -12,17 +12,31 @@ import locale from 'element-ui/lib/locale/lang/en'
 // import utils from './utils'
 
 //markdown
-import VMdpreview from '@kangc/v-md-editor/lib/preview'
-import '@kangc/v-md-editor/lib/style/preview.css'
-import githubTheme from  '@kangc/v-md-editor/lib/theme/github'
-VMdpreview.use(githubTheme)
-Vue.use(VMdpreview)
 import VueMarkdownEditor from '@kangc/v-md-editor'
 import '@kangc/v-md-editor/lib/style/base-editor.css'
-import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
+import githubTheme from '@kangc/v-md-editor/lib/theme/github.js'
+import '@kangc/v-md-editor/lib/theme/style/github.css'
 
-VueMarkdownEditor.use(vuepressTheme)
+import hljs from 'highlight.js/lib/core';
+// languages
+import json from 'highlight.js/lib/languages/json';
+
+hljs.registerLanguage('json', json);
+
+VueMarkdownEditor.use(githubTheme, {
+  Hljs: hljs,
+});
+
 Vue.use(VueMarkdownEditor)
+
+// preview
+import VMdpreview from '@kangc/v-md-editor/lib/preview'
+import '@kangc/v-md-editor/lib/style/preview.css'
+
+VMdpreview.use(githubTheme, {
+  Hljs: hljs,
+})
+Vue.use(VMdpreview)
 
 //swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'

@@ -12,6 +12,10 @@
                                 </a>
                                 &gt;
                                 <router-link :to='"/list/" + channel.id'>
+                                    {{ parentChannel.name }}
+                                </router-link>
+                                &gt;
+                                <router-link :to='"/list/" + channel.id'>
                                     {{ channel.name }}
                                 </router-link>
                                 &gt;
@@ -46,7 +50,7 @@
                     </p>
 
                     <div class="con_text">
-                        <v-md-preview :text="article.content"></v-md-preview>
+                        <v-md-preview :text="article.content"/>
                     </div>
                 </div>
 
@@ -138,6 +142,8 @@
                 comments:[],
                 channel: {},
                 channelId : '',
+                parentChannel: {},
+                parentChannelId: {},
                 xx: true
             }
         },
@@ -186,6 +192,16 @@
                 channelApi.getChannelByChannelId(this.channelId)
                     .then(response => {
                         this.channel = response.data
+                        this.parentChannelId = response.data.parentId
+                        this.getParentChannelByChilfrenId()
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            },
+            getParentChannelByChilfrenId() {
+                channelApi.getChannelByChannelId(this.parentChannelId)
+                .then(response => {
+                        this.parentChannel = response.data
                     }).catch(error => {
                         console.log(error)
                     })

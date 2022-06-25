@@ -105,7 +105,7 @@
                 parentChannel: {},
                 toppedArticles: [],
                 current: 1,
-                limit: 1,
+                limit: 5,
                 total: 0,
             }
         },
