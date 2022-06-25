@@ -43,7 +43,6 @@
                 articleApi.getRecommendedArticle(this.$route.params.id)
                     .then(response => {
                         this.articles = response.data.articleVo
-                        console.log(response.data)
                     })
             }
         }

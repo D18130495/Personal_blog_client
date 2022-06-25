@@ -38,7 +38,6 @@
                     .then(response => {
                         this.articles = response.data
                         this.article = this.articles[0]
-                        console.log(this.article)
                     }).catch(error=>{
                         console.log(error)
                     })

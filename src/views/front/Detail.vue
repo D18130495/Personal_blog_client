@@ -11,10 +11,10 @@
                                     Home
                                 </a>
                                 &gt;
-                                <router-link :to='"/list/" + channel.id'>
+                                <router-link v-if="parentChannel" :to='"/list/" + channel.id'>
                                     {{ parentChannel.name }}
                                 </router-link>
-                                &gt;
+                                <span v-if="parentChannel">&gt</span>
                                 <router-link :to='"/list/" + channel.id'>
                                     {{ channel.name }}
                                 </router-link>
