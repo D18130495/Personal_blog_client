@@ -25,7 +25,7 @@
                         </span>
                         Article
                     </h2>
-                    
+
                     <h1 class="con_tilte">{{ article.title }}</h1>
                     
                     <p class="bloginfo">
@@ -54,6 +54,8 @@
                     </div>
                 </div>
 
+                <ArticleTag :data="this.$route.params.id"/>
+
                 <div id="comments" class="comments-area" v-if="article.commentStatus == 0 || article.commentStatus == null">
                     <ol class="comment-list">
                         <li class="comments-anchor">
@@ -64,7 +66,7 @@
                                         Comments
                                     </span>
                                 </h3>
-                                <Form></Form>
+                                <Form/>
                             </div>
                         </li>
 
@@ -113,9 +115,10 @@
     import '@/assets/css/base.css'
     import '@/assets/css/m.css'
     import Header from "../../components/front/Header"
+    import ArticleTag from "../../components/front/ArticleTag"
     import Form from "../../components/front/Form"
     import Order from "../../components/front/Order"
-    import Like from  '../../components/front/Like'
+    import Like from  "../../components/front/Like"
     import Tag from "../../components/front/Tag"
     import FriendLink from "../../components/front/FriendLink"
     import Footer from "../../components/front/Footer"
@@ -127,7 +130,8 @@
     export default {
         name: "Detail",
         components: {
-            Header, 
+            Header,
+            ArticleTag,
             Form,
             Order,
             Like,

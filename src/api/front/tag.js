@@ -12,5 +12,11 @@ export default {
         url: `/front/tag/getTagByTagId/${tagId}`,
         method: 'get'
     })
-  }
+  },
+  getArticleRelatedTagByArticleId(articleId) {
+    return request({
+        url: `/front/tag/getArticleRelatedTagByArticleId/${articleId}`,
+        method: 'get'
+    })
+  },
 }

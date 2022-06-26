@@ -52,6 +52,10 @@ Vue.directive('title',{
   }
 })
 
+// seo
+import MetaInfo from 'vue-meta'
+Vue.use(MetaInfo)
+
 new Vue({
   router,
   store,

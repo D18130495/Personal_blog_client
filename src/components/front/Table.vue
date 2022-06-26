@@ -15,7 +15,8 @@
                         <ul>
                             <li v-for="(article, index) in articles" :key="index">
                                 <router-link :to='"/detail/" + article.id' :title="article.title" target="_blank">
-                                    <img :src="article.titleImg">
+                                    <img v-if="article.titleImg == null || article.titleImg==''" width="130px" height="120px" src="@/assets/images/flower.jpg">
+                                    <img v-else :src="article.titleImg" width="130px" height="120px" alt="article image">
                                     <span>{{ article.title }}</span>
                                 </router-link>
                             </li>
