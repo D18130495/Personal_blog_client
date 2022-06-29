@@ -6,8 +6,8 @@
 export default {
   name: 'App',
   metaInfo: {
-            title: 'HuaruoYM Blog'
-        },
+    title: 'HuaruoYM Blog'
+  },
 }
 </script>
 
