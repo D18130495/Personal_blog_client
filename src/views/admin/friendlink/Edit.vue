@@ -53,7 +53,6 @@
                 friendlinkApi.getFriendLinkByFriendLinkId(this.friendLinkId)
                     .then(response => {
                         this.formData = response.data
-                        console.log(response.data)
                     }).catch(error => {
                         console.log(error)
                     })

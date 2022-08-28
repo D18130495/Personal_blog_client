@@ -5,7 +5,7 @@ import token from '../store/token'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'https://www.huaruoyumu.online:9002',
+  baseURL: 'https://huaruoyumu.online',
   // baseURL: 'http://localhost:9001',
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 50000
