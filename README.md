@@ -1,5 +1,4 @@
-# Personal_blog_client
-
+# Personal_blog
 [HuaruoYM Blog](https://huaruoyumu.com/)
 
 ## Project Introduction
@@ -12,11 +11,7 @@
 - [Project Introduction](#project-introduction)
 
 ## Project Description
-This is a website for querying Lego sets information.<br>
-In this project, there are three main modules and functions:
-- Search Lego information: Use to search Lego sets information. 
-- Manage Lego sets information: Use to manage Lego sets theme and release year, manage the details of Lego sets. 
-- Manage user: Use to manage the user information.
+personal blog for record daily stories.
 
 ## Technology Selection
 
@@ -60,12 +55,8 @@ In this project, there are three main modules and functions:
 
 ## API for the each request.
 
-
 ## Project Introduction
 
 ### Overall layout
 
-
 ### Detailed description of different module functions
-
-## Youtube video
