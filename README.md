@@ -4,11 +4,6 @@
 ## Project Introduction
 - [Project Description](#Project-description)
 - [Technology Selection](#technology-selection)
-- [Project structure](#project-structure)
-- [Get started with this project](#get-started-with-this-project)
-- [Model definition for database](#model-definition-for-database)
-- [API for the each request](#api-for-the-each-request)
-- [Project Introduction](#project-introduction)
 
 ## Project Description
 personal blog for record daily stories.
@@ -39,24 +34,5 @@ personal blog for record daily stories.
 ### CI/CD
 |     Technology     |        Description       |                   Official website                   |
 | :----------------: | :----------------------: | :--------------------------------------------------: |
-|                    |                          |                                                      |
-
-## Project structure
-
-## Get started with this project.
-
-## Model definition for database.
-
-### Category
-
-### Set
-
-### User
-
-## API for the each request.
-
-## Project Introduction
-
-### Overall layout
-
-### Detailed description of different module functions
+|       Docker       |    Sofeware container    |                https://www.docker.com/               |
+|       Jenkins      |  Continuous integration  |                https://www.jenkins.io/               |
